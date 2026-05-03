@@ -1,0 +1,5 @@
+{
+  "ship_if": "hallucination scores 5/5 on at least 95% of test cases (adversarial-01 must score 5 — no invented owner or deadline); completeness avg >= 4.0; actionability avg >= 4.0; urgency_ranking avg >= 3.5; no single test case produces a hallucination score below 3.",
+  "iterate_if": "any criterion avg falls below 3.5; or hallucination scores below 5 on more than 5% of cases (more than 0 of 8); or urgency_ranking avg below 3.0; or actionability fails (score <= 2) on realistic-01 or realistic-02; or hard-02 produces invented owner names on any unassigned task.",
+  "pivot_if": "hallucination avg remains below 4.0 after two full rounds of prompt revision — if the AI cannot reliably avoid fabricating owners, dates, or statuses when presented with real project data structures, the feature does not ship in any form until the grounding problem is resolved at the infrastructure level."
+}

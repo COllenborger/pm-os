@@ -1,0 +1,5 @@
+{
+  "ship_if": "hallucination_rate 5/5 on 95%+ of cases (zero tolerance on adversarial-01 — any invented comparison vendor or fabricated price is an automatic block); recommendation_defensibility avg >= 4.0; scope_risk_identification avg >= 4.0; comparison_clarity avg >= 4.0.",
+  "iterate_if": "any criterion averages below 3.5 across the full test set; or hallucination_rate below 5 on more than one case; or questions_quality avg below 3.0 (questions are consistently generic rather than quote-specific); or recommendation contradicts stated risk tolerance on more than one case.",
+  "pivot_if": "hallucination_rate avg below 4.0 after two full prompt iteration cycles — if the model fabricates vendor comparisons, prices, or contract terms not present in the input, the feature creates direct liability exposure for Comparezy by corrupting homeowner decisions."
+}

@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(powershell.exe:*)",
+      "Bash(PYTHONUTF8=1 /c/Users/chris/AppData/Local/Programs/Python/Python313/python -m scripts.package_skill /c/Users/chris/.claude/skills/competitive-monitor)",
+      "Bash(mkdir -p /c/Users/chris/.claude/plugins/cache/local/competitive-monitor/unknown/skills/competitive-monitor)",
+      "Bash(unzip -o /c/Users/chris/.claude/plugins/cache/claude-plugins-official/skill-creator/unknown/skills/skill-creator/competitive-monitor.skill)"
+    ]
+  }
+}

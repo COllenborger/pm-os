@@ -1,0 +1,938 @@
+[
+  {
+    "id": "easy-01",
+    "description": "4 projects with one clearly blocked task (unassigned legal review, overdue). Should surface exactly one flag with correct owner and due date — no hallucination.",
+    "difficulty": "easy",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-001",
+          "name": "Q2 Product Launch Email",
+          "status": "blocked",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-20",
+          "completion_pct": 62,
+          "tasks": [
+            {"id": "TSK-001-3", "title": "Legal review of email copy", "assignee": "unassigned", "status": "blocked", "due": "2026-04-10"},
+            {"id": "TSK-001-4", "title": "HTML template QA across clients", "assignee": "Devon Scott", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-001-5", "title": "Schedule send in Iterable", "assignee": "Marcus Lee", "status": "not_started", "due": "2026-04-18"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-08", "text": "Need legal to unblock this week or we miss the send window."}
+          ]
+        },
+        {
+          "id": "PRJ-004",
+          "name": "Lifecycle Email Overhaul — Onboarding Series",
+          "status": "on_track",
+          "owner": "Jenna Pak",
+          "target_date": "2026-05-01",
+          "completion_pct": 70,
+          "tasks": [
+            {"id": "TSK-004-4", "title": "Copy drafts — emails 5-6", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-18"},
+            {"id": "TSK-004-5", "title": "Segmentation logic in Iterable", "assignee": "Marcus Lee", "status": "not_started", "due": "2026-04-24"}
+          ],
+          "recent_comments": [
+            {"author": "Jenna Pak", "date": "2026-04-11", "text": "On pace. Last two drafts landing by EOD Friday."}
+          ]
+        },
+        {
+          "id": "PRJ-009",
+          "name": "Quarterly Stakeholder Deck — Q2",
+          "status": "on_track",
+          "owner": "Rachel Torres",
+          "target_date": "2026-04-24",
+          "completion_pct": 25,
+          "tasks": [
+            {"id": "TSK-009-2", "title": "Pull KPI data", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-009-3", "title": "Draft narrative", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-04-20"}
+          ],
+          "recent_comments": [
+            {"author": "Rachel Torres", "date": "2026-04-12", "text": "Normal cadence. No issues."}
+          ]
+        },
+        {
+          "id": "PRJ-010",
+          "name": "Q2 Launch One-Pager",
+          "status": "on_track",
+          "owner": "Sofia Ruiz",
+          "target_date": "2026-04-17",
+          "completion_pct": 65,
+          "tasks": [
+            {"id": "TSK-010-3", "title": "Design layout", "assignee": "Theo Kim", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-010-4", "title": "Final PDF + sales handoff", "assignee": "Sofia Ruiz", "status": "not_started", "due": "2026-04-17"}
+          ],
+          "recent_comments": [
+            {"author": "Sofia Ruiz", "date": "2026-04-12", "text": "Theo's design review tomorrow, then I'll package. On track for Friday."}
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "easy-02",
+    "description": "3 on-track projects with no blockers, nothing overdue, all tasks assigned. Should produce a clean summary with zero false-positive flags.",
+    "difficulty": "easy",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-005",
+          "name": "Customer Case Study Series — Q2",
+          "status": "on_track",
+          "owner": "Hana Nakamura",
+          "target_date": "2026-05-30",
+          "completion_pct": 45,
+          "tasks": [
+            {"id": "TSK-005-3", "title": "Conduct interviews (6)", "assignee": "Hana Nakamura", "status": "in_progress", "due": "2026-04-20"}
+          ],
+          "recent_comments": [
+            {"author": "Hana Nakamura", "date": "2026-04-10", "text": "Interviews going great. 3 of 6 complete."}
+          ]
+        },
+        {
+          "id": "PRJ-012",
+          "name": "Trade Show Booth — ODSC East 2026",
+          "status": "on_track",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-05",
+          "completion_pct": 50,
+          "tasks": [
+            {"id": "TSK-012-3", "title": "Collateral (flyers, demo cards)", "assignee": "Sofia Ruiz", "status": "in_progress", "due": "2026-04-20"},
+            {"id": "TSK-012-4", "title": "Staff schedule + travel", "assignee": "Anika Raman", "status": "in_progress", "due": "2026-04-18"}
+          ],
+          "recent_comments": [
+            {"author": "Ben Alvarez", "date": "2026-04-11", "text": "Tracking well. Vendor delivery confirmed for 5/3."}
+          ]
+        },
+        {
+          "id": "PRJ-004",
+          "name": "Lifecycle Email Overhaul — Onboarding Series",
+          "status": "on_track",
+          "owner": "Jenna Pak",
+          "target_date": "2026-05-01",
+          "completion_pct": 70,
+          "tasks": [
+            {"id": "TSK-004-4", "title": "Copy drafts — emails 5-6", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-18"},
+            {"id": "TSK-004-5", "title": "Segmentation logic in Iterable", "assignee": "Marcus Lee", "status": "not_started", "due": "2026-04-24"}
+          ],
+          "recent_comments": [
+            {"author": "Jenna Pak", "date": "2026-04-11", "text": "On pace. Drafts land Friday."}
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-01",
+    "description": "15 GreenPath projects mirroring Rachel's actual workload: 3 blocked, 4 at risk, 1 overdue, 1 overdue-but-by-design, 5 on track, 1 completed. Tests ordering, completeness, and ability to handle mixed statuses.",
+    "difficulty": "realistic",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-001",
+          "name": "Launch Email — Q2 Product v3",
+          "status": "blocked",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-20",
+          "completion_pct": 62,
+          "tasks": [
+            {"id": "TSK-001-3", "title": "Legal review of email copy", "assignee": "unassigned", "status": "blocked", "due": "2026-04-10"},
+            {"id": "TSK-001-4", "title": "HTML template QA across clients", "assignee": "Devon Scott", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-001-5", "title": "Schedule send in Iterable", "assignee": "Marcus Lee", "status": "not_started", "due": "2026-04-18"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-08", "text": "Pushed email design review to Friday. Need legal to unblock this week or we miss the send window."},
+            {"author": "Rachel Torres", "date": "2026-04-06", "text": "Flagging again: who owns legal review on our side? This is the third project blocked on the same ambiguity."}
+          ]
+        },
+        {
+          "id": "PRJ-007",
+          "name": "Paid Ads Reactivation — Google + Meta",
+          "status": "blocked",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-25",
+          "completion_pct": 35,
+          "tasks": [
+            {"id": "TSK-007-2", "title": "Creative briefs for 3 ad sets", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-05"},
+            {"id": "TSK-007-3", "title": "Audience research from analytics", "assignee": "unassigned", "status": "not_started", "due": "2026-04-03"},
+            {"id": "TSK-007-4", "title": "Landing page variants", "assignee": "Theo Kim", "status": "not_started", "due": "2026-04-15"}
+          ],
+          "recent_comments": [
+            {"author": "Priya Shah", "date": "2026-04-07", "text": "Blocked on audience data. If I don't get it by Thursday the 4/25 launch slips."},
+            {"author": "Rachel Torres", "date": "2026-04-05", "text": "Ownership ambiguity again. I'll claim audience research temporarily unless someone else picks it up."}
+          ]
+        },
+        {
+          "id": "PRJ-013",
+          "name": "Email Deliverability Audit",
+          "status": "blocked",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-30",
+          "completion_pct": 20,
+          "tasks": [
+            {"id": "TSK-013-2", "title": "Vendor NDA + SOW signed (Mailhealth Inc)", "assignee": "Marcus Lee", "status": "blocked", "due": "2026-04-05"},
+            {"id": "TSK-013-3", "title": "DNS/SPF/DKIM access handoff", "assignee": "Lucas Weber", "status": "not_started", "due": "2026-04-12"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-06", "text": "Procurement is sitting on the Mailhealth SOW. Rachel, can you nudge? We're 14 days in with no response."},
+            {"author": "Rachel Torres", "date": "2026-04-06", "text": "I'll ping procurement lead (Dana Kwon) Monday."}
+          ]
+        },
+        {
+          "id": "PRJ-002",
+          "name": "GreenPath Summit 2026 — Event Logistics",
+          "status": "at_risk",
+          "owner": "Anika Raman",
+          "target_date": "2026-06-08",
+          "completion_pct": 40,
+          "tasks": [
+            {"id": "TSK-002-2", "title": "Keynote speaker confirmations (3)", "assignee": "Anika Raman", "status": "in_progress", "due": "2026-04-01"},
+            {"id": "TSK-002-4", "title": "Attendee registration site live", "assignee": "Devon Scott", "status": "not_started", "due": "2026-04-25"}
+          ],
+          "recent_comments": [
+            {"author": "Anika Raman", "date": "2026-04-11", "text": "Dr. Patel still silent. If no reply by 4/15 I'll swap to backup (Maya Liu). Registration copy depends on final speaker list."}
+          ]
+        },
+        {
+          "id": "PRJ-003",
+          "name": "Website Rebrand Phase 2 — Product Pages",
+          "status": "at_risk",
+          "owner": "Theo Kim",
+          "target_date": "2026-05-15",
+          "completion_pct": 55,
+          "tasks": [
+            {"id": "TSK-003-3", "title": "Copy rewrites — 18 product pages", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-10"},
+            {"id": "TSK-003-5", "title": "SEO redirects mapping", "assignee": "unassigned", "status": "not_started", "due": "2026-05-01"}
+          ],
+          "recent_comments": [
+            {"author": "Theo Kim", "date": "2026-04-12", "text": "Copy is the critical path. Jenna is stretched across this and the Q2 launch email. We should triage."},
+            {"author": "Rachel Torres", "date": "2026-04-09", "text": "Redirects task has no owner. Lucas or Devon — please claim by Monday."}
+          ]
+        },
+        {
+          "id": "PRJ-008",
+          "name": "Partner Co-Marketing — BrightWave + Apex",
+          "status": "at_risk",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-12",
+          "completion_pct": 30,
+          "tasks": [
+            {"id": "TSK-008-3", "title": "Joint webinar topic agreement", "assignee": "Ben Alvarez", "status": "in_progress", "due": "2026-03-30"},
+            {"id": "TSK-008-4", "title": "Co-branded landing page", "assignee": "unassigned", "status": "not_started", "due": "2026-04-22"}
+          ],
+          "recent_comments": [
+            {"author": "Ben Alvarez", "date": "2026-04-09", "text": "Topic mediation taking longer than expected. Partners want different things."},
+            {"author": "Rachel Torres", "date": "2026-04-08", "text": "Let's not let this drift another week. Decide the topic by 4/14 or pull in leadership."}
+          ]
+        },
+        {
+          "id": "PRJ-014",
+          "name": "HubSpot Cleanup — Contacts + Workflows",
+          "status": "at_risk",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-22",
+          "completion_pct": 48,
+          "tasks": [
+            {"id": "TSK-014-3", "title": "Audit 63 active workflows", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-05"},
+            {"id": "TSK-014-4", "title": "Archive stale workflows", "assignee": "Priya Shah", "status": "not_started", "due": "2026-04-15"}
+          ],
+          "recent_comments": [
+            {"author": "Priya Shah", "date": "2026-04-11", "text": "Scope is 30% bigger than we thought. I can hit 4/22 only if I drop the paid-ads audience work."},
+            {"author": "Rachel Torres", "date": "2026-04-11", "text": "Let's discuss Monday. Paid ads reactivation is already blocked on your audience work — this is a real tradeoff."}
+          ]
+        },
+        {
+          "id": "PRJ-011",
+          "name": "SEO Content Backlog — Q2 Batch",
+          "status": "overdue",
+          "owner": "Amara Okafor",
+          "target_date": "2026-04-05",
+          "completion_pct": 55,
+          "tasks": [
+            {"id": "TSK-011-3", "title": "Freelancer drafts (12 articles)", "assignee": "Amara Okafor", "status": "in_progress", "due": "2026-04-01"},
+            {"id": "TSK-011-4", "title": "Editorial pass", "assignee": "Hana Nakamura", "status": "not_started", "due": "2026-04-05"}
+          ],
+          "recent_comments": [
+            {"author": "Amara Okafor", "date": "2026-04-03", "text": "Freelancer (Mira Kovac) went dark after 4/1. Sourcing replacement via Upwork."},
+            {"author": "Rachel Torres", "date": "2026-04-03", "text": "Noted. Let's reset target to 4/30 once you have the new freelancer signed."}
+          ]
+        },
+        {
+          "id": "PRJ-015",
+          "name": "Brand Asset Library Migration — Frontify to Bynder",
+          "status": "overdue",
+          "owner": "Theo Kim",
+          "target_date": "2026-04-08",
+          "completion_pct": 72,
+          "tasks": [
+            {"id": "TSK-015-4", "title": "Metadata + tagging pass", "assignee": "Devon Scott", "status": "in_progress", "due": "2026-04-05"},
+            {"id": "TSK-015-6", "title": "Frontify shutdown", "assignee": "Theo Kim", "status": "not_started", "due": "2026-04-30"}
+          ],
+          "recent_comments": [
+            {"author": "Theo Kim", "date": "2026-04-10", "text": "Target date slipped but this is by design — we decided in the 4/7 retro to treat the archive tagging and Frontify shutdown as a controlled tail. Not a fire."},
+            {"author": "Rachel Torres", "date": "2026-04-08", "text": "Agree with Theo — updating status to controlled tail. Closing out this week as a soft win."}
+          ]
+        },
+        {
+          "id": "PRJ-004",
+          "name": "Lifecycle Email Overhaul — Onboarding Series",
+          "status": "on_track",
+          "owner": "Jenna Pak",
+          "target_date": "2026-05-01",
+          "completion_pct": 70,
+          "tasks": [
+            {"id": "TSK-004-4", "title": "Copy drafts — emails 5-6", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-18"},
+            {"id": "TSK-004-5", "title": "Segmentation logic in Iterable", "assignee": "Marcus Lee", "status": "not_started", "due": "2026-04-24"}
+          ],
+          "recent_comments": [
+            {"author": "Jenna Pak", "date": "2026-04-11", "text": "On pace. Last two drafts landing by EOD Friday."}
+          ]
+        },
+        {
+          "id": "PRJ-005",
+          "name": "Customer Case Study Series — Q2",
+          "status": "on_track",
+          "owner": "Hana Nakamura",
+          "target_date": "2026-05-30",
+          "completion_pct": 45,
+          "tasks": [
+            {"id": "TSK-005-3", "title": "Conduct interviews (6)", "assignee": "Hana Nakamura", "status": "in_progress", "due": "2026-04-20"}
+          ],
+          "recent_comments": [
+            {"author": "Hana Nakamura", "date": "2026-04-10", "text": "Interviews going great. 3 of 6 done."}
+          ]
+        },
+        {
+          "id": "PRJ-009",
+          "name": "Quarterly Stakeholder Deck — Q2",
+          "status": "on_track",
+          "owner": "Rachel Torres",
+          "target_date": "2026-04-24",
+          "completion_pct": 25,
+          "tasks": [
+            {"id": "TSK-009-2", "title": "Pull KPI data", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-009-3", "title": "Draft narrative", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-04-20"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-010",
+          "name": "Q2 Launch One-Pager",
+          "status": "on_track",
+          "owner": "Sofia Ruiz",
+          "target_date": "2026-04-17",
+          "completion_pct": 65,
+          "tasks": [
+            {"id": "TSK-010-3", "title": "Design layout", "assignee": "Theo Kim", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-010-4", "title": "Final PDF + sales handoff", "assignee": "Sofia Ruiz", "status": "not_started", "due": "2026-04-17"}
+          ],
+          "recent_comments": [
+            {"author": "Sofia Ruiz", "date": "2026-04-12", "text": "Theo's design review tomorrow, then I'll package. On track for Friday."}
+          ]
+        },
+        {
+          "id": "PRJ-012",
+          "name": "Trade Show Booth — ODSC East 2026",
+          "status": "on_track",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-05",
+          "completion_pct": 50,
+          "tasks": [
+            {"id": "TSK-012-3", "title": "Collateral (flyers, demo cards)", "assignee": "Sofia Ruiz", "status": "in_progress", "due": "2026-04-20"},
+            {"id": "TSK-012-4", "title": "Staff schedule + travel", "assignee": "Anika Raman", "status": "in_progress", "due": "2026-04-18"}
+          ],
+          "recent_comments": [
+            {"author": "Ben Alvarez", "date": "2026-04-11", "text": "Tracking well. Vendor delivery confirmed for 5/3."}
+          ]
+        },
+        {
+          "id": "PRJ-006",
+          "name": "Q1 Marketing Retro Report",
+          "status": "completed",
+          "owner": "Rachel Torres",
+          "target_date": "2026-04-10",
+          "completion_pct": 100,
+          "tasks": [],
+          "recent_comments": [
+            {"author": "Rachel Torres", "date": "2026-04-09", "text": "Delivered. Archiving."}
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-02",
+    "description": "8 projects where 3 tasks have status=blocked but comment threads from the last 7 days clearly indicate the blocks are resolved. AI must not flag resolved items as active blockers.",
+    "difficulty": "realistic",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-003",
+          "name": "Website Rebrand Phase 2 — Product Pages",
+          "status": "at_risk",
+          "owner": "Theo Kim",
+          "target_date": "2026-05-15",
+          "completion_pct": 60,
+          "tasks": [
+            {"id": "TSK-003-3", "title": "Copy rewrites — 18 product pages", "assignee": "Jenna Pak", "status": "blocked", "due": "2026-04-10"},
+            {"id": "TSK-003-4", "title": "Dev implementation — hero sections", "assignee": "Lucas Weber", "status": "in_progress", "due": "2026-04-28"}
+          ],
+          "recent_comments": [
+            {"author": "Jenna Pak", "date": "2026-04-13", "text": "Unblocked — got final brand guidance from Theo this morning. Back in progress, should finish by Thursday."},
+            {"author": "Theo Kim", "date": "2026-04-13", "text": "Confirmed. Jenna is unblocked. Removing the blocker flag."}
+          ]
+        },
+        {
+          "id": "PRJ-007",
+          "name": "Paid Ads Reactivation — Google + Meta",
+          "status": "on_track",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-25",
+          "completion_pct": 50,
+          "tasks": [
+            {"id": "TSK-007-3", "title": "Audience research from analytics", "assignee": "Rachel Torres", "status": "blocked", "due": "2026-04-03"},
+            {"id": "TSK-007-4", "title": "Landing page variants", "assignee": "Theo Kim", "status": "in_progress", "due": "2026-04-15"}
+          ],
+          "recent_comments": [
+            {"author": "Rachel Torres", "date": "2026-04-12", "text": "Audience research is done and shared with Priya. This is unblocked."},
+            {"author": "Priya Shah", "date": "2026-04-12", "text": "Got the data, starting creative briefs now. We're moving."}
+          ]
+        },
+        {
+          "id": "PRJ-013",
+          "name": "Email Deliverability Audit",
+          "status": "on_track",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-30",
+          "completion_pct": 35,
+          "tasks": [
+            {"id": "TSK-013-2", "title": "Vendor NDA + SOW signed (Mailhealth Inc)", "assignee": "Marcus Lee", "status": "blocked", "due": "2026-04-05"},
+            {"id": "TSK-013-3", "title": "DNS/SPF/DKIM access handoff", "assignee": "Lucas Weber", "status": "not_started", "due": "2026-04-16"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-14", "text": "SOW signed this morning. Procurement came through. We're unblocked and starting the handoff with Lucas today."}
+          ]
+        },
+        {
+          "id": "PRJ-002",
+          "name": "GreenPath Summit 2026 — Event Logistics",
+          "status": "on_track",
+          "owner": "Anika Raman",
+          "target_date": "2026-06-08",
+          "completion_pct": 45,
+          "tasks": [
+            {"id": "TSK-002-2", "title": "Keynote speaker confirmations (3)", "assignee": "Anika Raman", "status": "done", "due": "2026-04-15"},
+            {"id": "TSK-002-4", "title": "Attendee registration site live", "assignee": "Devon Scott", "status": "in_progress", "due": "2026-04-25"}
+          ],
+          "recent_comments": [
+            {"author": "Anika Raman", "date": "2026-04-13", "text": "All 3 speakers confirmed including Dr. Patel who replied this morning. Registration copy can finalize now."}
+          ]
+        },
+        {
+          "id": "PRJ-005",
+          "name": "Customer Case Study Series — Q2",
+          "status": "on_track",
+          "owner": "Hana Nakamura",
+          "target_date": "2026-05-30",
+          "completion_pct": 50,
+          "tasks": [
+            {"id": "TSK-005-3", "title": "Conduct interviews (6)", "assignee": "Hana Nakamura", "status": "in_progress", "due": "2026-04-20"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-009",
+          "name": "Quarterly Stakeholder Deck — Q2",
+          "status": "on_track",
+          "owner": "Rachel Torres",
+          "target_date": "2026-04-24",
+          "completion_pct": 35,
+          "tasks": [
+            {"id": "TSK-009-2", "title": "Pull KPI data", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-009-3", "title": "Draft narrative", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-04-20"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-010",
+          "name": "Q2 Launch One-Pager",
+          "status": "on_track",
+          "owner": "Sofia Ruiz",
+          "target_date": "2026-04-17",
+          "completion_pct": 80,
+          "tasks": [
+            {"id": "TSK-010-4", "title": "Final PDF + sales handoff", "assignee": "Sofia Ruiz", "status": "in_progress", "due": "2026-04-17"}
+          ],
+          "recent_comments": [
+            {"author": "Sofia Ruiz", "date": "2026-04-13", "text": "Design approved. Packaging now, will send to sales by Friday."}
+          ]
+        },
+        {
+          "id": "PRJ-012",
+          "name": "Trade Show Booth — ODSC East 2026",
+          "status": "on_track",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-05",
+          "completion_pct": 60,
+          "tasks": [
+            {"id": "TSK-012-3", "title": "Collateral (flyers, demo cards)", "assignee": "Sofia Ruiz", "status": "in_progress", "due": "2026-04-20"}
+          ],
+          "recent_comments": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-03",
+    "description": "12 projects with a dense due-date cluster: 6 tasks due within 3 days of week_of, 3 overdue items, 2 blocked. Tests urgency ordering under time pressure and due-date proximity logic.",
+    "difficulty": "realistic",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-011",
+          "name": "SEO Content Backlog — Q2 Batch",
+          "status": "overdue",
+          "owner": "Amara Okafor",
+          "target_date": "2026-04-05",
+          "completion_pct": 55,
+          "tasks": [
+            {"id": "TSK-011-3", "title": "Freelancer drafts (12 articles)", "assignee": "Amara Okafor", "status": "in_progress", "due": "2026-04-01"},
+            {"id": "TSK-011-4", "title": "Editorial pass", "assignee": "Hana Nakamura", "status": "not_started", "due": "2026-04-05"}
+          ],
+          "recent_comments": [
+            {"author": "Amara Okafor", "date": "2026-04-12", "text": "New freelancer onboarded. Expect 5 drafts by 4/16."}
+          ]
+        },
+        {
+          "id": "PRJ-001",
+          "name": "Launch Email — Q2 Product v3",
+          "status": "blocked",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-20",
+          "completion_pct": 62,
+          "tasks": [
+            {"id": "TSK-001-3", "title": "Legal review of email copy", "assignee": "unassigned", "status": "blocked", "due": "2026-04-10"},
+            {"id": "TSK-001-4", "title": "HTML template QA", "assignee": "Devon Scott", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-001-5", "title": "Schedule send in Iterable", "assignee": "Marcus Lee", "status": "not_started", "due": "2026-04-18"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-13", "text": "Still waiting on legal. QA starts Thursday regardless."}
+          ]
+        },
+        {
+          "id": "PRJ-009",
+          "name": "Quarterly Stakeholder Deck — Q2",
+          "status": "on_track",
+          "owner": "Rachel Torres",
+          "target_date": "2026-04-24",
+          "completion_pct": 25,
+          "tasks": [
+            {"id": "TSK-009-2", "title": "Pull KPI data", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-009-3", "title": "Draft narrative", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-04-20"},
+            {"id": "TSK-009-4", "title": "Review with CMO", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-04-23"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-010",
+          "name": "Q2 Launch One-Pager",
+          "status": "on_track",
+          "owner": "Sofia Ruiz",
+          "target_date": "2026-04-17",
+          "completion_pct": 65,
+          "tasks": [
+            {"id": "TSK-010-3", "title": "Design layout", "assignee": "Theo Kim", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-010-4", "title": "Final PDF + sales handoff", "assignee": "Sofia Ruiz", "status": "not_started", "due": "2026-04-17"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-012",
+          "name": "Trade Show Booth — ODSC East 2026",
+          "status": "on_track",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-05",
+          "completion_pct": 50,
+          "tasks": [
+            {"id": "TSK-012-4", "title": "Staff schedule + travel", "assignee": "Anika Raman", "status": "in_progress", "due": "2026-04-16"},
+            {"id": "TSK-012-3", "title": "Collateral (flyers, demo cards)", "assignee": "Sofia Ruiz", "status": "in_progress", "due": "2026-04-16"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-014",
+          "name": "HubSpot Cleanup — Contacts + Workflows",
+          "status": "at_risk",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-22",
+          "completion_pct": 48,
+          "tasks": [
+            {"id": "TSK-014-4", "title": "Archive stale workflows", "assignee": "Priya Shah", "status": "not_started", "due": "2026-04-15"},
+            {"id": "TSK-014-5", "title": "Document new naming conventions", "assignee": "Hana Nakamura", "status": "not_started", "due": "2026-04-22"}
+          ],
+          "recent_comments": [
+            {"author": "Priya Shah", "date": "2026-04-11", "text": "Scope is bigger than expected. Hitting 4/22 is possible but tight."}
+          ]
+        },
+        {
+          "id": "PRJ-004",
+          "name": "Lifecycle Email Overhaul",
+          "status": "on_track",
+          "owner": "Jenna Pak",
+          "target_date": "2026-05-01",
+          "completion_pct": 70,
+          "tasks": [
+            {"id": "TSK-004-4", "title": "Copy drafts — emails 5-6", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-18"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-005",
+          "name": "Customer Case Study Series — Q2",
+          "status": "on_track",
+          "owner": "Hana Nakamura",
+          "target_date": "2026-05-30",
+          "completion_pct": 45,
+          "tasks": [
+            {"id": "TSK-005-3", "title": "Conduct interviews (6)", "assignee": "Hana Nakamura", "status": "in_progress", "due": "2026-04-20"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-007",
+          "name": "Paid Ads Reactivation — Google + Meta",
+          "status": "blocked",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-25",
+          "completion_pct": 35,
+          "tasks": [
+            {"id": "TSK-007-3", "title": "Audience research from analytics", "assignee": "unassigned", "status": "not_started", "due": "2026-04-03"},
+            {"id": "TSK-007-4", "title": "Landing page variants", "assignee": "Theo Kim", "status": "not_started", "due": "2026-04-15"}
+          ],
+          "recent_comments": [
+            {"author": "Priya Shah", "date": "2026-04-13", "text": "Still waiting on audience data. Launch is in 10 days."}
+          ]
+        },
+        {
+          "id": "PRJ-002",
+          "name": "GreenPath Summit 2026 — Event Logistics",
+          "status": "at_risk",
+          "owner": "Anika Raman",
+          "target_date": "2026-06-08",
+          "completion_pct": 40,
+          "tasks": [
+            {"id": "TSK-002-4", "title": "Attendee registration site live", "assignee": "Devon Scott", "status": "not_started", "due": "2026-04-25"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-015",
+          "name": "Brand Asset Library Migration — Frontify to Bynder",
+          "status": "overdue",
+          "owner": "Theo Kim",
+          "target_date": "2026-04-08",
+          "completion_pct": 72,
+          "tasks": [
+            {"id": "TSK-015-4", "title": "Metadata + tagging pass (low-priority archive assets)", "assignee": "Devon Scott", "status": "in_progress", "due": "2026-04-05"}
+          ],
+          "recent_comments": [
+            {"author": "Theo Kim", "date": "2026-04-10", "text": "This is a controlled tail — not a fire. Archive tagging is low-priority 2022-2023 files."}
+          ]
+        },
+        {
+          "id": "PRJ-008",
+          "name": "Partner Co-Marketing — BrightWave + Apex",
+          "status": "at_risk",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-12",
+          "completion_pct": 30,
+          "tasks": [
+            {"id": "TSK-008-4", "title": "Co-branded landing page", "assignee": "unassigned", "status": "not_started", "due": "2026-04-22"}
+          ],
+          "recent_comments": []
+        }
+      ]
+    }
+  },
+  {
+    "id": "hard-01",
+    "description": "20 projects with contradictory signals: 4 tasks have status=blocked but same-week comments explicitly say the block is resolved. AI must use comment context to correctly downgrade those flags.",
+    "difficulty": "hard",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-001",
+          "name": "Launch Email — Q2 Product v3",
+          "status": "blocked",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-20",
+          "completion_pct": 62,
+          "tasks": [
+            {"id": "TSK-001-3", "title": "Legal review of email copy", "assignee": "unassigned", "status": "blocked", "due": "2026-04-10"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-14", "text": "Legal came through this morning. We are unblocked. Devon starting QA now."}
+          ]
+        },
+        {
+          "id": "PRJ-007",
+          "name": "Paid Ads Reactivation — Google + Meta",
+          "status": "blocked",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-25",
+          "completion_pct": 50,
+          "tasks": [
+            {"id": "TSK-007-3", "title": "Audience research from analytics", "assignee": "Rachel Torres", "status": "blocked", "due": "2026-04-03"}
+          ],
+          "recent_comments": [
+            {"author": "Rachel Torres", "date": "2026-04-13", "text": "Audience research is complete and sent to Priya. This is resolved."},
+            {"author": "Priya Shah", "date": "2026-04-13", "text": "Confirmed. Starting creative briefs today."}
+          ]
+        },
+        {
+          "id": "PRJ-013",
+          "name": "Email Deliverability Audit",
+          "status": "blocked",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-30",
+          "completion_pct": 35,
+          "tasks": [
+            {"id": "TSK-013-2", "title": "Vendor NDA + SOW signed", "assignee": "Marcus Lee", "status": "blocked", "due": "2026-04-05"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-14", "text": "SOW signed by procurement. Moving to access handoff with Lucas."}
+          ]
+        },
+        {
+          "id": "PRJ-003",
+          "name": "Website Rebrand Phase 2 — Product Pages",
+          "status": "at_risk",
+          "owner": "Theo Kim",
+          "target_date": "2026-05-15",
+          "completion_pct": 60,
+          "tasks": [
+            {"id": "TSK-003-3", "title": "Copy rewrites — 18 product pages", "assignee": "Jenna Pak", "status": "blocked", "due": "2026-04-10"},
+            {"id": "TSK-003-5", "title": "SEO redirects mapping", "assignee": "unassigned", "status": "not_started", "due": "2026-05-01"}
+          ],
+          "recent_comments": [
+            {"author": "Jenna Pak", "date": "2026-04-14", "text": "Brand guidance arrived this morning. Back in progress — 11 of 18 pages now done."},
+            {"author": "Rachel Torres", "date": "2026-04-09", "text": "Redirects task has no owner. Lucas or Devon — please claim by Monday."}
+          ]
+        },
+        {
+          "id": "PRJ-002",
+          "name": "GreenPath Summit 2026 — Event Logistics",
+          "status": "at_risk",
+          "owner": "Anika Raman",
+          "target_date": "2026-06-08",
+          "completion_pct": 45,
+          "tasks": [
+            {"id": "TSK-002-4", "title": "Attendee registration site live", "assignee": "Devon Scott", "status": "not_started", "due": "2026-04-25"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-011",
+          "name": "SEO Content Backlog — Q2 Batch",
+          "status": "overdue",
+          "owner": "Amara Okafor",
+          "target_date": "2026-04-05",
+          "completion_pct": 60,
+          "tasks": [
+            {"id": "TSK-011-3", "title": "Freelancer drafts (12 articles)", "assignee": "Amara Okafor", "status": "in_progress", "due": "2026-04-01"}
+          ],
+          "recent_comments": [
+            {"author": "Amara Okafor", "date": "2026-04-12", "text": "New freelancer started. Expecting 5 drafts by Thursday."}
+          ]
+        },
+        {
+          "id": "PRJ-008",
+          "name": "Partner Co-Marketing — BrightWave + Apex",
+          "status": "at_risk",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-12",
+          "completion_pct": 30,
+          "tasks": [
+            {"id": "TSK-008-3", "title": "Joint webinar topic agreement", "assignee": "Ben Alvarez", "status": "in_progress", "due": "2026-03-30"},
+            {"id": "TSK-008-4", "title": "Co-branded landing page", "assignee": "unassigned", "status": "not_started", "due": "2026-04-22"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-014",
+          "name": "HubSpot Cleanup — Contacts + Workflows",
+          "status": "at_risk",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-22",
+          "completion_pct": 55,
+          "tasks": [
+            {"id": "TSK-014-4", "title": "Archive stale workflows", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"},
+            {"id": "TSK-014-5", "title": "Document naming conventions", "assignee": "Hana Nakamura", "status": "not_started", "due": "2026-04-22"}
+          ],
+          "recent_comments": []
+        },
+        {"id": "PRJ-004", "name": "Lifecycle Email Overhaul", "status": "on_track", "owner": "Jenna Pak", "target_date": "2026-05-01", "completion_pct": 75, "tasks": [{"id": "TSK-004-4", "title": "Copy drafts — emails 5-6", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-18"}], "recent_comments": []},
+        {"id": "PRJ-005", "name": "Customer Case Study Series Q2", "status": "on_track", "owner": "Hana Nakamura", "target_date": "2026-05-30", "completion_pct": 50, "tasks": [{"id": "TSK-005-3", "title": "Conduct interviews (6)", "assignee": "Hana Nakamura", "status": "in_progress", "due": "2026-04-20"}], "recent_comments": []},
+        {"id": "PRJ-009", "name": "Quarterly Stakeholder Deck Q2", "status": "on_track", "owner": "Rachel Torres", "target_date": "2026-04-24", "completion_pct": 35, "tasks": [{"id": "TSK-009-2", "title": "Pull KPI data", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"}, {"id": "TSK-009-3", "title": "Draft narrative", "assignee": "Rachel Torres", "status": "not_started", "due": "2026-04-20"}], "recent_comments": []},
+        {"id": "PRJ-010", "name": "Q2 Launch One-Pager", "status": "on_track", "owner": "Sofia Ruiz", "target_date": "2026-04-17", "completion_pct": 80, "tasks": [{"id": "TSK-010-4", "title": "Final PDF + sales handoff", "assignee": "Sofia Ruiz", "status": "in_progress", "due": "2026-04-17"}], "recent_comments": []},
+        {"id": "PRJ-012", "name": "Trade Show Booth ODSC East 2026", "status": "on_track", "owner": "Ben Alvarez", "target_date": "2026-05-05", "completion_pct": 55, "tasks": [{"id": "TSK-012-3", "title": "Collateral flyers and demo cards", "assignee": "Sofia Ruiz", "status": "in_progress", "due": "2026-04-20"}, {"id": "TSK-012-4", "title": "Staff schedule and travel", "assignee": "Anika Raman", "status": "in_progress", "due": "2026-04-18"}], "recent_comments": []},
+        {"id": "PRJ-015", "name": "Brand Asset Library Migration", "status": "on_track", "owner": "Theo Kim", "target_date": "2026-04-30", "completion_pct": 85, "tasks": [{"id": "TSK-015-6", "title": "Frontify shutdown", "assignee": "Theo Kim", "status": "not_started", "due": "2026-04-30"}], "recent_comments": []},
+        {"id": "PRJ-016", "name": "Q2 Partner Newsletter", "status": "on_track", "owner": "Sofia Ruiz", "target_date": "2026-04-28", "completion_pct": 40, "tasks": [{"id": "TSK-016-1", "title": "Content collection from partners", "assignee": "Ben Alvarez", "status": "in_progress", "due": "2026-04-18"}, {"id": "TSK-016-2", "title": "Copy and layout", "assignee": "Sofia Ruiz", "status": "not_started", "due": "2026-04-24"}], "recent_comments": []},
+        {"id": "PRJ-017", "name": "Social Media Calendar — May", "status": "on_track", "owner": "Amara Okafor", "target_date": "2026-04-25", "completion_pct": 30, "tasks": [{"id": "TSK-017-1", "title": "Content ideation session", "assignee": "Amara Okafor", "status": "in_progress", "due": "2026-04-16"}, {"id": "TSK-017-2", "title": "Copy drafts", "assignee": "Amara Okafor", "status": "not_started", "due": "2026-04-22"}], "recent_comments": []},
+        {"id": "PRJ-018", "name": "Website Analytics Audit", "status": "on_track", "owner": "Priya Shah", "target_date": "2026-05-10", "completion_pct": 20, "tasks": [{"id": "TSK-018-1", "title": "GA4 setup review", "assignee": "Lucas Weber", "status": "not_started", "due": "2026-04-24"}], "recent_comments": []},
+        {"id": "PRJ-019", "name": "Podcast Sponsorship Outreach", "status": "on_track", "owner": "Ben Alvarez", "target_date": "2026-05-20", "completion_pct": 15, "tasks": [{"id": "TSK-019-1", "title": "Shortlist 10 podcasts", "assignee": "Ben Alvarez", "status": "in_progress", "due": "2026-04-20"}], "recent_comments": []},
+        {"id": "PRJ-020", "name": "Internal Brand Guidelines Update", "status": "on_track", "owner": "Hana Nakamura", "target_date": "2026-05-15", "completion_pct": 25, "tasks": [{"id": "TSK-020-1", "title": "Audit current guidelines doc", "assignee": "Hana Nakamura", "status": "in_progress", "due": "2026-04-22"}], "recent_comments": []}
+      ]
+    }
+  },
+  {
+    "id": "hard-02",
+    "description": "15 projects with 5 critical tasks that have assignee=unassigned and due dates within 7 days. AI must flag missing ownership explicitly without inventing owner names.",
+    "difficulty": "hard",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-001",
+          "name": "Launch Email — Q2 Product v3",
+          "status": "blocked",
+          "owner": "Marcus Lee",
+          "target_date": "2026-04-20",
+          "completion_pct": 62,
+          "tasks": [
+            {"id": "TSK-001-3", "title": "Legal review of email copy", "assignee": "unassigned", "status": "blocked", "due": "2026-04-10"},
+            {"id": "TSK-001-5", "title": "Schedule send in Iterable", "assignee": "unassigned", "status": "not_started", "due": "2026-04-16"}
+          ],
+          "recent_comments": [
+            {"author": "Marcus Lee", "date": "2026-04-08", "text": "Two tasks here still need owners. Flagging for Rachel."}
+          ]
+        },
+        {
+          "id": "PRJ-003",
+          "name": "Website Rebrand Phase 2 — Product Pages",
+          "status": "at_risk",
+          "owner": "Theo Kim",
+          "target_date": "2026-05-15",
+          "completion_pct": 55,
+          "tasks": [
+            {"id": "TSK-003-5", "title": "SEO redirects mapping", "assignee": "unassigned", "status": "not_started", "due": "2026-04-18"}
+          ],
+          "recent_comments": [
+            {"author": "Rachel Torres", "date": "2026-04-09", "text": "Redirects task has no owner. Lucas or Devon — please claim by Monday."}
+          ]
+        },
+        {
+          "id": "PRJ-007",
+          "name": "Paid Ads Reactivation — Google + Meta",
+          "status": "blocked",
+          "owner": "Priya Shah",
+          "target_date": "2026-04-25",
+          "completion_pct": 35,
+          "tasks": [
+            {"id": "TSK-007-3", "title": "Audience research from analytics", "assignee": "unassigned", "status": "not_started", "due": "2026-04-03"},
+            {"id": "TSK-007-4", "title": "Landing page variants", "assignee": "unassigned", "status": "not_started", "due": "2026-04-16"}
+          ],
+          "recent_comments": [
+            {"author": "Priya Shah", "date": "2026-04-07", "text": "Blocked on audience data — no owner still. Launch at risk."}
+          ]
+        },
+        {
+          "id": "PRJ-008",
+          "name": "Partner Co-Marketing — BrightWave + Apex",
+          "status": "at_risk",
+          "owner": "Ben Alvarez",
+          "target_date": "2026-05-12",
+          "completion_pct": 30,
+          "tasks": [
+            {"id": "TSK-008-4", "title": "Co-branded landing page", "assignee": "unassigned", "status": "not_started", "due": "2026-04-22"}
+          ],
+          "recent_comments": []
+        },
+        {"id": "PRJ-004", "name": "Lifecycle Email Overhaul", "status": "on_track", "owner": "Jenna Pak", "target_date": "2026-05-01", "completion_pct": 70, "tasks": [{"id": "TSK-004-4", "title": "Copy drafts emails 5-6", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-18"}], "recent_comments": []},
+        {"id": "PRJ-005", "name": "Customer Case Study Series Q2", "status": "on_track", "owner": "Hana Nakamura", "target_date": "2026-05-30", "completion_pct": 45, "tasks": [{"id": "TSK-005-3", "title": "Conduct interviews (6)", "assignee": "Hana Nakamura", "status": "in_progress", "due": "2026-04-20"}], "recent_comments": []},
+        {"id": "PRJ-009", "name": "Quarterly Stakeholder Deck Q2", "status": "on_track", "owner": "Rachel Torres", "target_date": "2026-04-24", "completion_pct": 25, "tasks": [{"id": "TSK-009-2", "title": "Pull KPI data", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"}], "recent_comments": []},
+        {"id": "PRJ-010", "name": "Q2 Launch One-Pager", "status": "on_track", "owner": "Sofia Ruiz", "target_date": "2026-04-17", "completion_pct": 65, "tasks": [{"id": "TSK-010-3", "title": "Design layout", "assignee": "Theo Kim", "status": "in_progress", "due": "2026-04-15"}], "recent_comments": []},
+        {"id": "PRJ-011", "name": "SEO Content Backlog Q2 Batch", "status": "overdue", "owner": "Amara Okafor", "target_date": "2026-04-05", "completion_pct": 55, "tasks": [{"id": "TSK-011-3", "title": "Freelancer drafts (12 articles)", "assignee": "Amara Okafor", "status": "in_progress", "due": "2026-04-01"}], "recent_comments": []},
+        {"id": "PRJ-012", "name": "Trade Show Booth ODSC East 2026", "status": "on_track", "owner": "Ben Alvarez", "target_date": "2026-05-05", "completion_pct": 50, "tasks": [{"id": "TSK-012-4", "title": "Staff schedule and travel", "assignee": "Anika Raman", "status": "in_progress", "due": "2026-04-18"}], "recent_comments": []},
+        {"id": "PRJ-013", "name": "Email Deliverability Audit", "status": "on_track", "owner": "Marcus Lee", "target_date": "2026-04-30", "completion_pct": 30, "tasks": [{"id": "TSK-013-3", "title": "DNS/SPF/DKIM access handoff", "assignee": "Lucas Weber", "status": "not_started", "due": "2026-04-18"}], "recent_comments": []},
+        {"id": "PRJ-014", "name": "HubSpot Cleanup Contacts and Workflows", "status": "at_risk", "owner": "Priya Shah", "target_date": "2026-04-22", "completion_pct": 48, "tasks": [{"id": "TSK-014-4", "title": "Archive stale workflows", "assignee": "Priya Shah", "status": "not_started", "due": "2026-04-15"}], "recent_comments": []},
+        {"id": "PRJ-015", "name": "Brand Asset Library Migration", "status": "on_track", "owner": "Theo Kim", "target_date": "2026-04-30", "completion_pct": 85, "tasks": [{"id": "TSK-015-6", "title": "Frontify shutdown", "assignee": "Theo Kim", "status": "not_started", "due": "2026-04-30"}], "recent_comments": []},
+        {"id": "PRJ-002", "name": "GreenPath Summit 2026 Event Logistics", "status": "on_track", "owner": "Anika Raman", "target_date": "2026-06-08", "completion_pct": 50, "tasks": [{"id": "TSK-002-4", "title": "Attendee registration site live", "assignee": "Devon Scott", "status": "in_progress", "due": "2026-04-25"}], "recent_comments": []},
+        {"id": "PRJ-016", "name": "Q2 Partner Newsletter", "status": "on_track", "owner": "Sofia Ruiz", "target_date": "2026-04-28", "completion_pct": 40, "tasks": [{"id": "TSK-016-2", "title": "Copy and layout", "assignee": "Sofia Ruiz", "status": "not_started", "due": "2026-04-24"}], "recent_comments": []}
+      ]
+    }
+  },
+  {
+    "id": "adversarial-01",
+    "description": "A project named 'Q2 Campaign Sprint' with no owner field, a comment thread ending mid-sentence, and no due_date set — but a comment mentions 'need this by end of week.' AI must surface the ambiguity and must not hallucinate an owner, a deadline, or a task status.",
+    "difficulty": "adversarial",
+    "input_data": {
+      "team_lead": "Rachel Torres",
+      "team": "GreenPath Studios Marketing Ops",
+      "week_of": "2026-04-14",
+      "projects": [
+        {
+          "id": "PRJ-X01",
+          "name": "Q2 Campaign Sprint",
+          "status": "in_progress",
+          "owner": null,
+          "target_date": null,
+          "completion_pct": null,
+          "tasks": [
+            {"id": "TSK-X01-1", "title": "Campaign brief finalization", "assignee": null, "status": "in_progress", "due": null},
+            {"id": "TSK-X01-2", "title": "Asset production", "assignee": "Devon Scott", "status": "not_started", "due": null},
+            {"id": "TSK-X01-3", "title": "Stakeholder sign-off", "assignee": null, "status": "not_started", "due": null}
+          ],
+          "recent_comments": [
+            {"author": "unknown", "date": "2026-04-12", "text": "We need this by end of week or the"},
+            {"author": "Devon Scott", "date": "2026-04-11", "text": "Waiting on the brief before I can start assets. Who owns"}
+          ]
+        },
+        {
+          "id": "PRJ-004",
+          "name": "Lifecycle Email Overhaul — Onboarding Series",
+          "status": "on_track",
+          "owner": "Jenna Pak",
+          "target_date": "2026-05-01",
+          "completion_pct": 70,
+          "tasks": [
+            {"id": "TSK-004-4", "title": "Copy drafts — emails 5-6", "assignee": "Jenna Pak", "status": "in_progress", "due": "2026-04-18"}
+          ],
+          "recent_comments": []
+        },
+        {
+          "id": "PRJ-009",
+          "name": "Quarterly Stakeholder Deck — Q2",
+          "status": "on_track",
+          "owner": "Rachel Torres",
+          "target_date": "2026-04-24",
+          "completion_pct": 25,
+          "tasks": [
+            {"id": "TSK-009-2", "title": "Pull KPI data", "assignee": "Priya Shah", "status": "in_progress", "due": "2026-04-15"}
+          ],
+          "recent_comments": []
+        }
+      ]
+    }
+  }
+]

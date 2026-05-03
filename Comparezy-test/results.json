@@ -1,0 +1,201 @@
+{
+  "summary": {
+    "per_criterion": {
+      "scope_accuracy": {
+        "avg": 4.4,
+        "n": 5,
+        "weight": "Critical"
+      },
+      "hallucination_rate": {
+        "avg": 3.8,
+        "n": 5,
+        "weight": "Critical"
+      },
+      "comparison_clarity": {
+        "avg": 4.6,
+        "n": 5,
+        "weight": "High"
+      },
+      "negotiation_quality": {
+        "avg": 2.8,
+        "n": 5,
+        "weight": "Medium"
+      },
+      "benchmark_relevance": {
+        "avg": 2.2,
+        "n": 5,
+        "weight": "Low"
+      }
+    },
+    "overall_weighted": 3.97,
+    "total_cases": 5,
+    "error_cases": 0,
+    "thresholds": {
+      "ship_if": "scope_accuracy avg >= 4.0 across all test cases; hallucination_rate scores 5/5 on 95% or more of test cases (zero tolerance on adversarial-01 \u00e2\u20ac\u201d any invented line item on the lump-sum quote is an automatic block); comparison_clarity avg >= 4.0; no test case where the AI invents a contractor name, price, or line item not present in the input_data.",
+      "iterate_if": "any single criterion averages below 3.5 across the full test set; or hallucination_rate scores below 5 on more than one test case (more than 5% of cases with 5+ test cases); or negotiation_quality avg below 3.0 (questions are consistently generic rather than quote-specific); or benchmark_relevance fails to cite a source on more than 2 cases.",
+      "pivot_if": "hallucination_rate averages below 4.0 after two full prompt iteration cycles \u00e2\u20ac\u201d if the AI cannot reliably restrict its output to claims traceable to the uploaded documents, the feature cannot ship in any form, because fabricated line items or prices would corrupt homeowner decisions and create liability exposure for Comparezy."
+    }
+  },
+  "results": [
+    {
+      "id": "adversarial-01",
+      "description": "A single lump-sum roofing quote with no line items, no warranty language, no permit mention, and only vague scope description. Tests whether the AI correctly limits output to what is present rather than inventing specifics.",
+      "difficulty": "adversarial",
+      "status": "ok",
+      "error": null,
+      "product_output": "```json\n{\n  \"total_amount\": 9800,\n  \"sub_quotes\": null,\n  \"missing_items\": [\n    \"Itemized materials list (shingle brand/type, underlayment, flashing, ice/water shield)\",\n    \"Labor breakdown separate from materials\",\n    \"Scope of deck inspection and replacement policy\",\n    \"Project timeline and estimated completion date\",\n    \"Warranty (materials and workmanship)\",\n    \"Contractor license number\",\n    \"Proof of insurance / certificate of liability\",\n    \"Payment schedule or deposit terms\",\n    \"Debris removal and cleanup details\"\n  ],\n  \"permit_status\": \"No permit mentioned\",\n  \"red_flags\": [\n    \"Single lump-sum with zero line items \u00e2\u20ac\u201d no way to verify what is or is not included in the work\",\n    \"No warranty language whatsoever, not even a passing reference\",\n    \"No permit mentioned \u00e2\u20ac\u201d Phoenix, AZ requires permits for full roof replacements; absence is a compliance and resale risk\",\n    \"No contractor license number, insurance certificate, or bonding information provided\",\n    \"Contact information is limited to 'Call for questions' \u00e2\u20ac\u201d no phone number, email, or business address listed in the quote\",\n    \"$9,800 for a full Phoenix replacement may be low depending on roof size; suspiciously low pricing often signals cut corners on materials or unlicensed labor\"\n  ],\n  \"summary\": \"This quote provides almost no verifiable information \u00e2\u20ac\u201d it is a single lump sum with no itemization, no warranty, no permit commitment, and no contractor credentials, making it impossible to assess value or accountability. Do not accept without a fully itemized revision and proof of license and insurance.\"\n}\n```",
+      "judge_raw": "```json\n{\n  \"scores\": {\"scope_accuracy\": 5, \"hallucination_rate\": 4, \"comparison_clarity\": 4, \"negotiation_quality\": 3, \"benchmark_relevance\": 3},\n  \"reasoning\": {\"scope_accuracy\": \"The output correctly identifies missing items and red flags without inventing scope that wasn't present in the lump-sum quote \u00e2\u20ac\u201d it treats absences as gaps rather than fabricating inclusions.\", \"hallucination_rate\": \"Nearly all stated facts are traceable to the input or reasonable inference (no permit, no warranty, no line items), but the Phoenix-specific permit requirement and the pricing suspicion claim ('$9,800 may be low') are asserted without a named source, introducing minor unverified factual claims.\", \"comparison_clarity\": \"This is a single-quote scenario with no second quote to compare against, so a true side-by-side is impossible; the output appropriately pivots to a gap/red-flag analysis, but the rubric criterion assumes multi-quote comparison which limits the achievable score here.\", \"negotiation_quality\": \"The output surfaces specific gaps (no license number, no warranty, lump-sum pricing) but does not translate them into named negotiation questions directed at a specific contractor \u00e2\u20ac\u201d it stops at identification rather than producing actionable ask language.\", \"benchmark_relevance\": \"A Phoenix roof replacement price suspicion is raised but no source, date, or explicit cost range is cited, making the benchmark claim unverifiable even though the regional context is plausible.\"}\n}\n```",
+      "scores": {
+        "scope_accuracy": {
+          "score": 5,
+          "reason": "The output correctly identifies missing items and red flags without inventing scope that wasn't present in the lump-sum quote \u00e2\u20ac\u201d it treats absences as gaps rather than fabricating inclusions."
+        },
+        "hallucination_rate": {
+          "score": 4,
+          "reason": "Nearly all stated facts are traceable to the input or reasonable inference (no permit, no warranty, no line items), but the Phoenix-specific permit requirement and the pricing suspicion claim ('$9,800 may be low') are asserted without a named source, introducing minor unverified factual claims."
+        },
+        "comparison_clarity": {
+          "score": 4,
+          "reason": "This is a single-quote scenario with no second quote to compare against, so a true side-by-side is impossible; the output appropriately pivots to a gap/red-flag analysis, but the rubric criterion assumes multi-quote comparison which limits the achievable score here."
+        },
+        "negotiation_quality": {
+          "score": 3,
+          "reason": "The output surfaces specific gaps (no license number, no warranty, lump-sum pricing) but does not translate them into named negotiation questions directed at a specific contractor \u00e2\u20ac\u201d it stops at identification rather than producing actionable ask language."
+        },
+        "benchmark_relevance": {
+          "score": 3,
+          "reason": "A Phoenix roof replacement price suspicion is raised but no source, date, or explicit cost range is cited, making the benchmark claim unverifiable even though the regional context is plausible."
+        }
+      },
+      "elapsed_s": 30.08
+    },
+    {
+      "id": "easy-01",
+      "description": "Two roofing quotes with identical format and one clear scope gap: Desert Peak includes synthetic underlayment; Sunstate does not. $2,200 total price variance.",
+      "difficulty": "easy",
+      "status": "ok",
+      "error": null,
+      "product_output": "```json\n{\n  \"total_amount\": 16400,\n  \"sub_quotes\": [\n    {\n      \"option\": \"Desert Peak Roofing\",\n      \"amount\": 16400,\n      \"description\": \"Full-scope replacement: 2-layer tearoff, synthetic underlayment, GAF Timberline HDZ shingles, 4 pipe boots, 2 ridge vents, cleanup, and permit included. GAF certified installer, 5-year workmanship warranty.\"\n    },\n    {\n      \"option\": \"Sunstate Contractors\",\n      \"amount\": 14200,\n      \"description\": \"Basic replacement: tearoff (layer count unspecified), unbranded architectural shingles, new ridge vents, debris removal. No underlayment, no pipe boots. Homeowner pulls permit. 2-year workmanship warranty.\"\n    }\n  ],\n  \"missing_items\": [\n    \"Sunstate: Underlayment not included \u00e2\u20ac\u201d code-required in most AZ jurisdictions and essential moisture barrier\",\n    \"Sunstate: Pipe boot replacement omitted \u00e2\u20ac\u201d Desert Peak replaces 4; Sunstate quotes none\",\n    \"Sunstate: Permit not included \u00e2\u20ac\u201d homeowner-responsible clause adds ~$400\u00e2\u20ac\u201c$800 and shifts liability\",\n    \"Sunstate: Shingle brand/model unspecified \u00e2\u20ac\u201d cannot confirm material equivalence to GAF Timberline HDZ\",\n    \"Sunstate: Layer count for tearoff not stated \u00e2\u20ac\u201d pricing and disposal costs may be understated\"\n  ],\n  \"permit_status\": \"Desert Peak: Contractor pulls permit, included at $2,200. Sunstate: Homeowner responsible \u00e2\u20ac\u201d not included in quote.\",\n  \"red_flags\": [\n    \"Sunstate omits underlayment \u00e2\u20ac\u201d a building code requirement in most jurisdictions; absence voids many manufacturer warranties\",\n    \"Sunstate's 2-year workmanship warranty is well below industry standard (5\u00e2\u20ac\u201c10 years); Desert Peak offers 5-year\",\n    \"Sunstate homeowner-pull-permit clause transfers legal liability to the homeowner if work fails inspection\",\n    \"Sunstate's true comparable cost is ~$15,800\u00e2\u20ac\u201c$16,300 once permit, underlayment, and pipe boots are added \u00e2\u20ac\u201d nearly eliminating the apparent $2,200 savings\",\n    \"No risk tolerance specified in input \u00e2\u20ac\u201d analysis defaults to moderate; adjust red flag severity accordingly\"\n  ],\n  \"summary\": \"Desert Peak is the stronger quote. Sunstate's $2,200 price advantage is illusory \u00e2\u20ac\u201d when missing scope items (underlayment, pipe boots, permit) are normalized, both quotes land at approximately the same cost, with Desert Peak delivering better warranty coverage and a certified installer credential.\"\n}\n```\n\n**Note on risk tolerance:** No `risk_tolerance` field was present in the input. The analysis defaults to moderate. A high-risk-tolerance user might accept Sunstate with caveats; a low-risk-tolerance user should be steered strongly toward Desert Peak or require Sunstate to revise scope before considering it.",
+      "judge_raw": "```json\n{\n  \"scores\": {\n    \"scope_accuracy\": 4,\n    \"hallucination_rate\": 4,\n    \"comparison_clarity\": 5,\n    \"negotiation_quality\": 1,\n    \"benchmark_relevance\": 1\n  },\n  \"reasoning\": {\n    \"scope_accuracy\": \"Correctly identifies the primary underlayment gap and extracts additional scope differences (pipe boots, permit, shingle brand, tearoff layer count) that appear traceable to the sub_quote descriptions in the structured output, but the test case specifies one clear scope gap so additional items introduce minor uncertainty about over-extraction.\",\n    \"hallucination_rate\": \"Prices ($16,400 vs $14,200) exactly match the stated $2,200 variance and contractor names are consistent throughout; minor deduction for added claims not directly traceable to quote text, such as the 'most AZ jurisdictions' code assertion and the '$400\u00e2\u20ac\u201c$800 permit cost range.'\",\n    \"comparison_clarity\": \"Exemplary: every scope difference names both the contractor and the specific line item, states inclusion/exclusion status, and the normalized cost comparison makes the decision immediately actionable without requiring the homeowner to re-read the originals.\",\n    \"negotiation_quality\": \"No negotiation questions, checklist, or suggested asks are present anywhere in the output; the rubric criterion is entirely unaddressed.\",\n    \"benchmark_relevance\": \"No external benchmark source, regional cost range, or citation is provided; the ~$15,800\u00e2\u20ac\u201c$16,300 figure is an internal cost normalization, not a market benchmark.\"\n  }\n}\n```",
+      "scores": {
+        "scope_accuracy": {
+          "score": 4,
+          "reason": "Correctly identifies the primary underlayment gap and extracts additional scope differences (pipe boots, permit, shingle brand, tearoff layer count) that appear traceable to the sub_quote descriptions in the structured output, but the test case specifies one clear scope gap so additional items introduce minor uncertainty about over-extraction."
+        },
+        "hallucination_rate": {
+          "score": 4,
+          "reason": "Prices ($16,400 vs $14,200) exactly match the stated $2,200 variance and contractor names are consistent throughout; minor deduction for added claims not directly traceable to quote text, such as the 'most AZ jurisdictions' code assertion and the '$400\u00e2\u20ac\u201c$800 permit cost range.'"
+        },
+        "comparison_clarity": {
+          "score": 5,
+          "reason": "Exemplary: every scope difference names both the contractor and the specific line item, states inclusion/exclusion status, and the normalized cost comparison makes the decision immediately actionable without requiring the homeowner to re-read the originals."
+        },
+        "negotiation_quality": {
+          "score": 1,
+          "reason": "No negotiation questions, checklist, or suggested asks are present anywhere in the output; the rubric criterion is entirely unaddressed."
+        },
+        "benchmark_relevance": {
+          "score": 1,
+          "reason": "No external benchmark source, regional cost range, or citation is provided; the ~$15,800\u00e2\u20ac\u201c$16,300 figure is an internal cost normalization, not a market benchmark."
+        }
+      },
+      "elapsed_s": 108.83
+    },
+    {
+      "id": "hard-01",
+      "description": "Three bathroom addition quotes with overlapping and conflicting scope descriptions. Pinnacle uses a lump-sum total with partial line items. SunValley and AZ Bath have full itemization but use different terminology for tile and fixture work.",
+      "difficulty": "hard",
+      "status": "ok",
+      "error": null,
+      "product_output": "```json\n{\n  \"total_amount\": 24800,\n  \"sub_quotes\": [\n    {\n      \"option\": \"Pinnacle Construction\",\n      \"amount\": 22000,\n      \"description\": \"Single lump-sum covering all labor and materials; notes claim plumbing, tile, fixtures, and electrical included. No itemized breakdown; permit not addressed.\"\n    },\n    {\n      \"option\": \"SunValley Bath & Tile\",\n      \"amount\": 26400,\n      \"description\": \"Fully itemized; fixtures are owner-supplied (not included). Carries a 10% PM fee ($2,500) and 15% materials markup ($3,700). Line items sum to $26,100 \u00e2\u20ac\u201d $300 below stated total.\"\n    },\n    {\n      \"option\": \"AZ Bath Specialists\",\n      \"amount\": 24800,\n      \"description\": \"Fully itemized with fixtures included and porcelain tile (upgrade over ceramic). Best warranty (3-year workmanship). Line items sum to $23,800 \u00e2\u20ac\u201d $1,000 below stated total.\"\n    }\n  ],\n  \"missing_items\": [\n    \"Project timeline / completion date \u00e2\u20ac\u201d absent from all three quotes\",\n    \"Pinnacle: zero itemized scope \u00e2\u20ac\u201d materials, quantities, and coverage unverifiable\",\n    \"Waterproofing membrane (Schluter, RedGard, or equivalent) not called out explicitly in any quote\",\n    \"Accessories (mirror, towel bars, toilet paper holder) not addressed in any quote\",\n    \"Tile brand, grade, and color selection unspecified in Pinnacle and SunValley quotes\"\n  ],\n  \"permit_status\": \"Unclear\",\n  \"red_flags\": [\n    \"AZ Bath math error: line items total $23,800 vs. stated $24,800 \u00e2\u20ac\u201d $1,000 unaccounted for; must be resolved before signing\",\n    \"SunValley math error: line items total $26,100 vs. stated $26,400 \u00e2\u20ac\u201d $300 unexplained\",\n    \"Scope mismatch between quotes: SunValley excludes fixtures (owner-supplied); AZ Bath includes them \u00e2\u20ac\u201d not apples-to-apples without adding $1,500\u00e2\u20ac\u201c$3,000+ to SunValley's true cost\",\n    \"Pinnacle lump-sum with no itemization \u00e2\u20ac\u201d no contractual basis to dispute scope creep or substituted materials mid-project\",\n    \"Pinnacle permit status unaddressed \u00e2\u20ac\u201d unpermitted bathroom addition in AZ creates resale liability and potential code violation\"\n  ],\n  \"summary\": \"Three competing bids ranging $22K\u00e2\u20ac\u201c$26.4K for the same bathroom addition; total_amount reflects AZ Bath Specialists as the recommended bid based on scope completeness (fixtures included), tile quality (porcelain), and strongest warranty (3-year). On a true apples-to-apples basis, SunValley is the most expensive once owner-supplied fixtures are factored in, and Pinnacle's lump-sum structure offers no accountability. Both AZ Bath and SunValley have line-item arithmetic errors \u00e2\u20ac\u201d AZ Bath's $1,000 gap is the more significant and must be explained in writing before contract execution. Note: no risk_tolerance field was present in the input; analysis defaults to standard (medium) risk posture.\"\n}\n```\n\n**Analysis notes:**\n\n- `total_amount` is set to AZ Bath's price ($24,800) as the recommended bid, not a sum \u00e2\u20ac\u201d these are three competing contractor bids for one project, not additive phases. Summing them ($73,200) would be meaningless.\n- `permit_status` is \"Unclear\" because Pinnacle does not address permits; SunValley and AZ Bath each include a $1,800 permit line item. A per-contractor field would be more precise than a single enum here.\n- The **SunValley scope gap is the most important decision lever**: once you add $1,500\u00e2\u20ac\u201c$3,000 for fixtures, SunValley's real cost likely exceeds $28K, making AZ Bath the clear winner on value despite the $1,000 math discrepancy.",
+      "judge_raw": "```json\n{\n  \"scores\": {\"scope_accuracy\": 5, \"hallucination_rate\": 4, \"comparison_clarity\": 5, \"negotiation_quality\": 4, \"benchmark_relevance\": 2},\n  \"reasoning\": {\"scope_accuracy\": \"Correctly identifies all major scope differences \u00e2\u20ac\u201d lump-sum vs. itemized, fixtures included vs. owner-supplied, ceramic vs. porcelain tile, warranty differences, permit gaps \u00e2\u20ac\u201d without inventing line items.\", \"hallucination_rate\": \"All contractor names, amounts, and scope claims appear grounded in the input; minor deduction for specific dollar figures like '$1,500\u00e2\u20ac\u201c$3,000 for fixtures' and '$2,500 PM fee / $3,700 materials markup' which are presented as fact but cannot be verified as traceable to the uploaded documents without seeing the originals.\", \"comparison_clarity\": \"Explicitly names each contractor alongside specific line items, math errors, and scope gaps (e.g., SunValley fixtures owner-supplied vs. AZ Bath included, exact dollar discrepancies), giving a homeowner a clear action path without re-reading originals.\", \"negotiation_quality\": \"Flags contractor-specific issues like AZ Bath's $1,000 math gap and Pinnacle's missing itemization, but stops short of providing explicit, contractor-named negotiation questions the homeowner could bring to each contractor.\", \"benchmark_relevance\": \"No external benchmark source or regional cost range is cited for a bathroom addition project; the output does not state whether the $22K\u00e2\u20ac\u201c$26.4K range falls within, above, or below any named benchmark.\"}\n}\n```",
+      "scores": {
+        "scope_accuracy": {
+          "score": 5,
+          "reason": "Correctly identifies all major scope differences \u00e2\u20ac\u201d lump-sum vs. itemized, fixtures included vs. owner-supplied, ceramic vs. porcelain tile, warranty differences, permit gaps \u00e2\u20ac\u201d without inventing line items."
+        },
+        "hallucination_rate": {
+          "score": 4,
+          "reason": "All contractor names, amounts, and scope claims appear grounded in the input; minor deduction for specific dollar figures like '$1,500\u00e2\u20ac\u201c$3,000 for fixtures' and '$2,500 PM fee / $3,700 materials markup' which are presented as fact but cannot be verified as traceable to the uploaded documents without seeing the originals."
+        },
+        "comparison_clarity": {
+          "score": 5,
+          "reason": "Explicitly names each contractor alongside specific line items, math errors, and scope gaps (e.g., SunValley fixtures owner-supplied vs. AZ Bath included, exact dollar discrepancies), giving a homeowner a clear action path without re-reading originals."
+        },
+        "negotiation_quality": {
+          "score": 4,
+          "reason": "Flags contractor-specific issues like AZ Bath's $1,000 math gap and Pinnacle's missing itemization, but stops short of providing explicit, contractor-named negotiation questions the homeowner could bring to each contractor."
+        },
+        "benchmark_relevance": {
+          "score": 2,
+          "reason": "No external benchmark source or regional cost range is cited for a bathroom addition project; the output does not state whether the $22K\u00e2\u20ac\u201c$26.4K range falls within, above, or below any named benchmark."
+        }
+      },
+      "elapsed_s": 94.94
+    },
+    {
+      "id": "realistic-01",
+      "description": "Two HVAC replacement quotes using different terminology for equivalent line items ('labor' vs. 'installation charge'), with a $1,800 total variance and one quote including a programmable thermostat the other omits.",
+      "difficulty": "realistic",
+      "status": "ok",
+      "error": null,
+      "product_output": "```json\n{\n  \"total_amount\": 6600,\n  \"sub_quotes\": [\n    {\n      \"option\": \"AZ Comfort Systems\",\n      \"amount\": 8400,\n      \"description\": \"Carrier 3-ton 16 SEER2 split system with removal/installation labor, Honeywell T6 Pro thermostat, permit, 5 lbs R-410A refrigerant, and ductwork inspection/sealing. NATE-certified technicians. 10-yr parts / 1-yr labor warranty.\"\n    },\n    {\n      \"option\": \"Desert Air HVAC\",\n      \"amount\": 6600,\n      \"description\": \"3-ton 16 SEER split system with installation, refrigerant (quantity unspecified), and permit. Excludes thermostat and ductwork service. 5-yr parts warranty only, no labor coverage.\"\n    }\n  ],\n  \"missing_items\": [\n    \"Desert Air: No thermostat included \u00e2\u20ac\u201d homeowner must budget ~$150\u00e2\u20ac\u201c250 separately\",\n    \"Desert Air: No ductwork inspection/sealing \u00e2\u20ac\u201d comparable add-on typically runs $800\u00e2\u20ac\u201c$1,200 in Scottsdale market\",\n    \"Desert Air: Refrigerant quantity not specified \u00e2\u20ac\u201d impossible to verify scope equivalence with AZ Comfort\",\n    \"Both quotes: No contractor license number or proof of liability/workers comp insurance cited\",\n    \"Both quotes: No projected installation date or project duration\"\n  ],\n  \"permit_status\": \"Both contractors include permit costs (AZ Comfort: $450; Desert Air: $600). Permits appear to be pulled by contractor.\",\n  \"red_flags\": [\n    \"Scope gap makes the price gap misleading: after adding thermostat (~$200) and ductwork service (~$1,000) to Desert Air, the true apples-to-apples delta narrows to roughly $400\u00e2\u20ac\u201c$600 \u00e2\u20ac\u201d not $1,800.\",\n    \"Desert Air warranty covers parts only (5 years) with no labor warranty \u00e2\u20ac\u201d any installation defect discovered after day one is fully out-of-pocket for the homeowner.\",\n    \"SEER vs. SEER2 discrepancy: AZ Comfort quotes a SEER2-rated unit (current EPA standard since Jan 2023); Desert Air quotes plain SEER, which may indicate an older or non-compliant unit. In Scottsdale's climate zone, this affects long-term energy cost and potential rebate eligibility.\",\n    \"Desert Air refrigerant line item ($300) is vague \u00e2\u20ac\u201d no quantity or refrigerant type listed, creating risk of scope creep charges if additional refrigerant is needed at install.\",\n    \"Neither quote references contractor license number or insurance certificate \u00e2\u20ac\u201d homeowner should verify both before signing.\"\n  ],\n  \"summary\": \"The headline $1,800 gap is mostly a scope illusion. AZ Comfort includes thermostat, ductwork service, SEER2-compliant equipment, NATE-certified labor, and a full parts + labor warranty \u00e2\u20ac\u201d Desert Air includes none of these. On a normalized basis, AZ Comfort is the stronger value and lower-risk choice, particularly given the absence of a labor warranty and the SEER/SEER2 ambiguity in the Desert Air quote.\",\n  \"notes\": \"No risk tolerance level was provided in the input. Analysis defaults to balanced (moderate risk tolerance). Risk tolerance input affects how aggressively red flags are weighted \u00e2\u20ac\u201d resubmit with risk_tolerance field for a calibrated assessment.\"\n}\n```",
+      "judge_raw": "```json\n{\n  \"scores\": {\n    \"scope_accuracy\": 3,\n    \"hallucination_rate\": 3,\n    \"comparison_clarity\": 4,\n    \"negotiation_quality\": 2,\n    \"benchmark_relevance\": 2\n  },\n  \"reasoning\": {\n    \"scope_accuracy\": \"The output correctly identifies the thermostat gap and $1,800 price variance, but fails to explicitly address the core test condition \u00e2\u20ac\u201d that 'labor' and 'installation charge' are terminologically equivalent line items rather than a scope difference, which is the scenario's key challenge; additionally, several scope items (ductwork sealing, SEER2 discrepancy, refrigerant quantity) appear plausible but cannot be confirmed as present in the source documents.\",\n    \"hallucination_rate\": \"Specific details such as equipment model (Carrier, Honeywell T6 Pro), refrigerant type/quantity (5 lbs R-410A), individual permit costs ($450/$600), and the 'Scottsdale market' location benchmark are stated as fact but are not traceable to named source documents or cited benchmarks, creating meaningful fabrication risk.\",\n    \"comparison_clarity\": \"The output names both contractors explicitly, calls out specific included vs. absent line items, and provides a normalized apples-to-apples delta calculation that a homeowner can act on without re-reading the original quotes.\",\n    \"negotiation_quality\": \"The output contains no explicit negotiation questions or checklist; the red_flags section is declarative rather than interrogative, and the rubric requires contractor-specific questions tied to identified gaps \u00e2\u20ac\u201d none are present.\",\n    \"benchmark_relevance\": \"Cost ranges for thermostat and ductwork are cited as 'Scottsdale market' figures with no named source, no date, and the location itself appears potentially fabricated since no region was specified in the test case input.\"\n  }\n}\n```",
+      "scores": {
+        "scope_accuracy": {
+          "score": 3,
+          "reason": "The output correctly identifies the thermostat gap and $1,800 price variance, but fails to explicitly address the core test condition \u00e2\u20ac\u201d that 'labor' and 'installation charge' are terminologically equivalent line items rather than a scope difference, which is the scenario's key challenge; additionally, several scope items (ductwork sealing, SEER2 discrepancy, refrigerant quantity) appear plausible but cannot be confirmed as present in the source documents."
+        },
+        "hallucination_rate": {
+          "score": 3,
+          "reason": "Specific details such as equipment model (Carrier, Honeywell T6 Pro), refrigerant type/quantity (5 lbs R-410A), individual permit costs ($450/$600), and the 'Scottsdale market' location benchmark are stated as fact but are not traceable to named source documents or cited benchmarks, creating meaningful fabrication risk."
+        },
+        "comparison_clarity": {
+          "score": 4,
+          "reason": "The output names both contractors explicitly, calls out specific included vs. absent line items, and provides a normalized apples-to-apples delta calculation that a homeowner can act on without re-reading the original quotes."
+        },
+        "negotiation_quality": {
+          "score": 2,
+          "reason": "The output contains no explicit negotiation questions or checklist; the red_flags section is declarative rather than interrogative, and the rubric requires contractor-specific questions tied to identified gaps \u00e2\u20ac\u201d none are present."
+        },
+        "benchmark_relevance": {
+          "score": 2,
+          "reason": "Cost ranges for thermostat and ductwork are cited as 'Scottsdale market' figures with no named source, no date, and the location itself appears potentially fabricated since no region was specified in the test case input."
+        }
+      },
+      "elapsed_s": 99.98
+    },
+    {
+      "id": "realistic-02",
+      "description": "Two kitchen remodel quotes where Mesa Remodeling includes permit cost in the total; Copper Basin assigns permit responsibility to homeowner. Both include cabinet replacement and countertops but differ on appliance installation.",
+      "difficulty": "realistic",
+      "status": "ok",
+      "error": null,
+      "product_output": "```json\n{\n  \"total_amount\": 34500,\n  \"sub_quotes\": [\n    {\n      \"option\": \"Mesa Remodeling Co.\",\n      \"amount\": 34500,\n      \"description\": \"Full kitchen remodel with permit pulled by contractor ($3,500 included), appliance installation for 3 units, GFCI/under-cabinet lighting, sink relocation. No painting.\"\n    },\n    {\n      \"option\": \"Copper Basin Renovations\",\n      \"amount\": 31200,\n      \"description\": \"Full kitchen remodel with painting included; excludes permit (homeowner responsibility, est. $3,500) and appliance installation (est. $1,200). Adjusted scope-normalized cost: ~$35,900.\"\n    }\n  ],\n  \"missing_items\": [\n    \"Project timeline and estimated completion date \u00e2\u20ac\u201d neither quote specifies\",\n    \"Contractor license number \u00e2\u20ac\u201d neither quote includes\",\n    \"Insurance certificate or coverage amounts \u00e2\u20ac\u201d neither quote mentions\",\n    \"Payment schedule and terms \u00e2\u20ac\u201d neither quote specifies draws or deposit requirements\",\n    \"Backsplash tile material spec for Copper Basin \u00e2\u20ac\u201d no tile type, size, or grout spec provided\",\n    \"Appliance installation not included by Copper Basin \u00e2\u20ac\u201d creates scope gap vs. Mesa\"\n  ],\n  \"permit_status\": \"Split: Mesa Remodeling will pull permits (included at $3,500). Copper Basin assigns permit responsibility to homeowner.\",\n  \"red_flags\": [\n    \"Copper Basin offloads permit responsibility to homeowner \u00e2\u20ac\u201d adds ~$3,500 cost, administrative burden, and compliance risk if homeowner delays or skips\",\n    \"Mesa permit fee of $3,500 is above the typical Mesa AZ residential kitchen permit range ($500\u00e2\u20ac\u201c$2,000); verify this is not inflated\",\n    \"Neither contractor provides project start date or estimated completion window\",\n    \"Neither quote includes contractor license number or proof of insurance/bonding\",\n    \"Copper Basin backsplash line item has no material specification \u00e2\u20ac\u201d opens door to substitution disputes mid-project\"\n  ],\n  \"summary\": \"These are two competing bids, not additive options \u00e2\u20ac\u201d total_amount reflects Mesa's more complete scope. The $3,300 headline price gap is misleading: once Copper Basin's homeowner-borne permit (~$3,500) and appliance install (~$1,200) are added, its adjusted cost is ~$35,900 vs. Mesa's $34,500. Mesa is the cleaner choice at effectively lower all-in cost; Copper Basin's only differentiator is included painting, which may not offset the permit and administrative burden it shifts to the homeowner.\"\n}\n```\n\n**Note on total_amount:** Summing two competing bids would be misleading \u00e2\u20ac\u201d `total_amount` reflects Mesa Remodeling's quote as the more complete scope baseline. The normalized comparison is in the summary.\n\n**Key call-out for a realistic risk tolerance:** The permit transfer to the homeowner in Copper Basin's bid is the single most important flag here. It's not just a cost shift \u00e2\u20ac\u201d if the homeowner forgets or delays, the work proceeds unpermitted, which creates liability at resale and can require tear-out to inspect. That alone tips the scale toward Mesa unless Copper Basin is willing to re-negotiate.",
+      "judge_raw": "```json\n{\n  \"scores\": {\"scope_accuracy\": 5, \"hallucination_rate\": 4, \"comparison_clarity\": 5, \"negotiation_quality\": 4, \"benchmark_relevance\": 3},\n  \"reasoning\": {\"scope_accuracy\": \"Correctly identifies all key scope differences \u00e2\u20ac\u201d permit responsibility split, appliance installation gap, painting inclusion by Copper Basin \u00e2\u20ac\u201d without inventing line items.\", \"hallucination_rate\": \"Contractor names and scope items align with the test case, but the specific permit cost figure of $3,500 and appliance install estimate of $1,200 appear to be inferred/fabricated rather than sourced directly from the uploaded documents.\", \"comparison_clarity\": \"The side-by-side is highly actionable \u00e2\u20ac\u201d names each contractor, calls out specific line items (permit, appliances, painting), and provides a scope-normalized cost comparison a homeowner can act on immediately.\", \"negotiation_quality\": \"Questions and flags are contractor-specific and tied to identified gaps (permit re-negotiation with Copper Basin, Mesa permit fee verification), though explicit negotiation question framing is embedded in red flags rather than a dedicated checklist.\", \"benchmark_relevance\": \"References a Mesa AZ permit range ($500\u00e2\u20ac\u201c$2,000) without citing a source or date, and no broader kitchen remodel cost benchmark with source is provided to contextualize the $34,500 quote.\"}\n}\n```",
+      "scores": {
+        "scope_accuracy": {
+          "score": 5,
+          "reason": "Correctly identifies all key scope differences \u00e2\u20ac\u201d permit responsibility split, appliance installation gap, painting inclusion by Copper Basin \u00e2\u20ac\u201d without inventing line items."
+        },
+        "hallucination_rate": {
+          "score": 4,
+          "reason": "Contractor names and scope items align with the test case, but the specific permit cost figure of $3,500 and appliance install estimate of $1,200 appear to be inferred/fabricated rather than sourced directly from the uploaded documents."
+        },
+        "comparison_clarity": {
+          "score": 5,
+          "reason": "The side-by-side is highly actionable \u00e2\u20ac\u201d names each contractor, calls out specific line items (permit, appliances, painting), and provides a scope-normalized cost comparison a homeowner can act on immediately."
+        },
+        "negotiation_quality": {
+          "score": 4,
+          "reason": "Questions and flags are contractor-specific and tied to identified gaps (permit re-negotiation with Copper Basin, Mesa permit fee verification), though explicit negotiation question framing is embedded in red flags rather than a dedicated checklist."
+        },
+        "benchmark_relevance": {
+          "score": 3,
+          "reason": "References a Mesa AZ permit range ($500\u00e2\u20ac\u201c$2,000) without citing a source or date, and no broader kitchen remodel cost benchmark with source is provided to contextualize the $34,500 quote."
+        }
+      },
+      "elapsed_s": 73.18
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "ship_if": "scope_accuracy avg >= 4.0 across all test cases; hallucination_rate scores 5/5 on 95% or more of test cases (zero tolerance on adversarial-01 — any invented line item on the lump-sum quote is an automatic block); comparison_clarity avg >= 4.0; no test case where the AI invents a contractor name, price, or line item not present in the input_data.",
+  "iterate_if": "any single criterion averages below 3.5 across the full test set; or hallucination_rate scores below 5 on more than one test case (more than 5% of cases with 5+ test cases); or negotiation_quality avg below 3.0 (questions are consistently generic rather than quote-specific); or benchmark_relevance fails to cite a source on more than 2 cases.",
+  "pivot_if": "hallucination_rate averages below 4.0 after two full prompt iteration cycles — if the AI cannot reliably restrict its output to claims traceable to the uploaded documents, the feature cannot ship in any form, because fabricated line items or prices would corrupt homeowner decisions and create liability exposure for Comparezy."
+}

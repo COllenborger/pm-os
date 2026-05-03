@@ -1,0 +1,32 @@
+[
+  {
+    "criterion": "hallucination_rate",
+    "weight": "Critical",
+    "five_out_of_five": "Zero fabricated prices, timelines, vendor names, or contract terms. Every claim in the output is traceable to the input evaluated_quotes or assessment_notes.",
+    "one_out_of_five": "Output invents prices, contract terms, comparison vendors, or scope items not present in the input data."
+  },
+  {
+    "criterion": "recommendation_defensibility",
+    "weight": "Critical",
+    "five_out_of_five": "Primary recommendation names the specific vendor, cites specific red flags or scope items from the input, and correctly reflects the stated risk tolerance from assessment_notes.",
+    "one_out_of_five": "Recommendation is vague, contradicts the input data, ignores stated risk tolerance, or cannot be traced back to specific input evidence."
+  },
+  {
+    "criterion": "scope_risk_identification",
+    "weight": "High",
+    "five_out_of_five": "All significant missing_items and red_flags from the input are surfaced in per_vendor_analysis. Deal-breaker risks (e.g., missing permits on insurance-required work) are explicitly escalated and not buried.",
+    "one_out_of_five": "Misses critical red flags or missing items present in the input. Fails to escalate deal-breaker risks to the homeowner."
+  },
+  {
+    "criterion": "comparison_clarity",
+    "weight": "High",
+    "five_out_of_five": "Vendor ranking is specific and references actual vendor names with concrete reasoning tied to input data. Homeowner can act on it without re-reading the original quotes.",
+    "one_out_of_five": "Vague comparison with no specific vendor references or reasoning. Homeowner cannot determine which vendor to call first."
+  },
+  {
+    "criterion": "questions_quality",
+    "weight": "Medium",
+    "five_out_of_five": "Each question names a specific vendor and references a specific gap or red flag from that vendor's evaluated_quote. Zero generic questions like 'ask about their experience'.",
+    "one_out_of_five": "Generic questions unrelated to the specific gaps identified in the evaluated_quotes input."
+  }
+]

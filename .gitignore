@@ -1,0 +1,69 @@
+﻿# Environment variables and secrets
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+credentials.json
+secrets.json
+
+# API keys and tokens
+.apikey
+api_key.txt
+token.txt
+oauth.json
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Large binaries and build artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.a
+*.lib
+dist/
+build/
+*.egg-info/
+
+# OS and editor clutter
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.#*
+
+# IDE and local settings
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.sublime-workspace
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+.cache/
+tmp/
+
+# OS-specific
+$RECYCLE.BIN/
+desktop.ini

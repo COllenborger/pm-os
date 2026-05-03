@@ -1,0 +1,32 @@
+[
+  {
+    "criterion": "scope_accuracy",
+    "weight": "Critical",
+    "five_out_of_five": "Identifies all scope differences between quotes using only items present in the uploaded documents; zero invented line items or scope claims.",
+    "one_out_of_five": "Invents line items not present in any uploaded quote, or misses more than half of the actual scope differences between proposals."
+  },
+  {
+    "criterion": "hallucination_rate",
+    "weight": "Critical",
+    "five_out_of_five": "Zero fabricated prices, contractor names, or line item claims; every stated fact is traceable to the uploaded quote content or a named benchmark source.",
+    "one_out_of_five": "Multiple invented facts present — prices, contractor names, or scope items not found in the provided input documents."
+  },
+  {
+    "criterion": "comparison_clarity",
+    "weight": "High",
+    "five_out_of_five": "Side-by-side comparison is specific to the actual quotes — names the contractor, names the line item, and states whether it is included or absent. Homeowner can act on it without re-reading the original quotes.",
+    "one_out_of_five": "Vague statements like 'Contractor A appears more thorough' with no reference to specific line items, prices, or scope gaps from the uploaded documents."
+  },
+  {
+    "criterion": "negotiation_quality",
+    "weight": "Medium",
+    "five_out_of_five": "Each suggested question names the contractor and references a specific gap or variance identified in this comparison — not a generic contractor question.",
+    "one_out_of_five": "Generic questions unrelated to the scope gaps or pricing differences identified in the uploaded quotes (e.g., 'Ask about their experience and references')."
+  },
+  {
+    "criterion": "benchmark_relevance",
+    "weight": "Low",
+    "five_out_of_five": "Cited cost range is plausible for the stated project type and region; source and date are named; output correctly states whether the quotes fall within, above, or below the range.",
+    "one_out_of_five": "Benchmark range is implausible for the project context, contradicts the input data, or no source is cited."
+  }
+]

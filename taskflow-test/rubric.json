@@ -1,0 +1,32 @@
+[
+  {
+    "criterion": "hallucination",
+    "weight": "Critical",
+    "five_out_of_five": "Zero fabricated owners, dates, task IDs, or status claims — every fact in the summary traces directly to the input data.",
+    "one_out_of_five": "Multiple invented facts present; owners, dates, or statuses appear that have no basis in the input data."
+  },
+  {
+    "criterion": "completeness",
+    "weight": "High",
+    "five_out_of_five": "Every real blocker, overdue item, and due-this-week task is surfaced; no signal in the input data is silently omitted.",
+    "one_out_of_five": "More than half of the real blockers or overdue items in the input are missing from the summary."
+  },
+  {
+    "criterion": "actionability",
+    "weight": "High",
+    "five_out_of_five": "Each flagged item names the specific task, its owner (or explicitly flags 'unassigned'), its due date, and a concrete next step or question a team lead can act on immediately.",
+    "one_out_of_five": "Vague statements such as 'check in on X project' with no task-level specificity, no owner named, no due date cited."
+  },
+  {
+    "criterion": "urgency_ranking",
+    "weight": "Medium",
+    "five_out_of_five": "Projects are ordered so the highest-risk items appear first; a team lead reading top-to-bottom hits the most urgent item within the first two project blocks.",
+    "one_out_of_five": "On-track projects appear ahead of blocked or overdue ones; ordering is random or alphabetical with no urgency logic."
+  },
+  {
+    "criterion": "readability",
+    "weight": "Low",
+    "five_out_of_five": "Summary is scannable in under 60 seconds, grouped coherently by project, with status labels that are visually distinct and not verbatim-repeated for every task.",
+    "one_out_of_five": "Wall of text with no project grouping, repeated boilerplate per item, requires multiple re-reads to extract any actionable signal."
+  }
+]

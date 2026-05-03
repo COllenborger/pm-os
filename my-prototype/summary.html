@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Summary — TaskFlow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <a href="dashboard.html" class="topbar-logo">Task<span>Flow</span></a>
+    <input class="topbar-search" type="text" placeholder="Search tasks, projects, people…" readonly>
+    <div class="topbar-right">
+      <button class="icon-btn" onclick="demoAlert(event)" title="Notifications">🔔</button>
+      <div class="avatar" title="Rachel Torres">RT</div>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <h1>Weekly Summary</h1>
+          <div class="page-meta">Last generated: Sun Apr 13, 11:00 PM · GreenPath Studios Marketing Ops</div>
+        </div>
+        <div class="page-actions">
+          <select class="time-range" title="Time range">
+            <option>This week</option>
+            <option>Next week</option>
+            <option>Last 2 weeks</option>
+            <option>Custom range</option>
+          </select>
+          <button class="btn btn-secondary" onclick="showToast('Regenerating… (demo only)')">↻ Regenerate</button>
+          <div class="page-actions-divider"></div>
+          <button class="btn btn-secondary" onclick="copyMarkdown()">📋 Copy</button>
+          <button class="btn btn-demo" title="Demo only">Slack</button>
+          <button class="btn btn-demo" title="Demo only">PDF</button>
+        </div>
+      </div>
+
+      <!-- Info banner -->
+      <div class="info-banner">
+        ⚠️&nbsp; <strong>8 items need your attention</strong> across 9 projects this week — Mon Apr 14, 2026
+      </div>
+
+      <!-- Summary tiers (rendered by JS) -->
+      <div id="summary-tiers"></div>
+
+      <!-- Completed toggle -->
+      <button class="completed-toggle" id="completed-toggle" onclick="toggleCompleted()">
+        <span id="completed-arrow">▸</span> Show completed (1)
+      </button>
+      <div class="completed-section" id="completed-section"></div>
+
+      <!-- Footer -->
+      <div class="summary-footer">
+        <div class="footer-actions">
+          <button class="btn btn-secondary" onclick="copyMarkdown()">📋 Copy as Markdown</button>
+          <button class="btn btn-demo" title="Demo only">Share to Slack</button>
+          <button class="btn btn-demo" title="Demo only">Export PDF</button>
+        </div>
+        <button class="btn btn-secondary" onclick="openModal()">Done reviewing</button>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Exit modal -->
+<div class="modal-backdrop" id="exit-modal">
+  <div class="modal">
+    <h2>Before you go — 3 quick questions</h2>
+    <p class="modal-sub">Takes 20 seconds. Helps us make Monday mornings better.</p>
+
+    <div class="modal-q">
+      <label>Did this replace any part of your manual review?</label>
+      <div class="radio-row">
+        <div class="radio-opt" onclick="pick(this,'q1')">Yes</div>
+        <div class="radio-opt" onclick="pick(this,'q1')">Partially</div>
+        <div class="radio-opt" onclick="pick(this,'q1')">No</div>
+      </div>
+    </div>
+
+    <div class="modal-q">
+      <label>What would you change? <span style="font-weight:400;color:#ADADAD">(optional)</span></label>
+      <textarea class="modal-textarea" placeholder="Anything — format, grouping, what's missing…"></textarea>
+    </div>
+
+    <div class="modal-q">
+      <label>Would you use this every Monday?</label>
+      <div class="radio-row">
+        <div class="radio-opt" onclick="pick(this,'q3')">Yes</div>
+        <div class="radio-opt" onclick="pick(this,'q3')">Yes, if…</div>
+        <div class="radio-opt" onclick="pick(this,'q3')">No</div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-ghost" onclick="closeModal()">Skip</button>
+      <button class="btn btn-primary" onclick="submitModal()">Submit →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="fixtures.js"></script>
+<script>
+// ── Render sidebar ──
+renderSidebar('sidebar', 'Weekly Summary');
+
+// ── Render summary tiers ──
+const TIER_ORDER = [
+  { key: 'overdue',  label: 'OVERDUE'  },
+  { key: 'blocked',  label: 'BLOCKED'  },
+  { key: 'at_risk',  label: 'AT RISK'  },
+  { key: 'on_track', label: 'ON TRACK' }
+];
+
+function buildProjectCard(project) {
+  const flags = getFlaggedTasks(project.id);
+  const sl = statusLabel(project.status);
+  const ctBadge = project.controlled_tail
+    ? '<span class="badge controlled_tail" style="margin-left:4px">Controlled tail</span>' : '';
+
+  let tasksHtml = '';
+  if (flags.length > 0) {
+    flags.forEach(task => {
+      const unassigned = task.assignee === 'unassigned';
+      const pastDue = isPast(task.due);
+      const provText = task.provenance.replace(/"/g, '&quot;').replace(/\n/g, '<br>');
+
+      tasksHtml += `
+        <div class="task-row" id="task-${task.id}">
+          <span class="task-id">${task.id}</span>
+          <span class="task-title">${task.title}</span>
+          <span class="task-assignee ${unassigned ? 'unassigned' : ''}">
+            ${unassigned ? '⚠ UNASSIGNED' : task.assignee}
+          </span>
+          <span class="task-due ${pastDue ? 'past' : ''}">${fmtDate(task.due)}</span>
+          <span class="prov-btn">?
+            <div class="prov-tooltip">
+              ${provText}
+              <div class="prov-source">Source: TaskFlow tasks + comments</div>
+            </div>
+          </span>
+          <button class="dismiss-btn" onclick="dismissTask('${task.id}')" title="Dismiss">×</button>
+        </div>`;
+    });
+  } else {
+    tasksHtml = '<div class="no-flags">No items flagged this week.</div>';
+  }
+
+  return `
+    <div class="project-card" id="card-${project.id}">
+      <div class="project-card-header">
+        <span class="badge ${project.status}">${sl}</span>
+        ${ctBadge}
+        <span class="project-name" onclick="demoAlert(event)">${project.name}</span>
+        <div class="project-meta">
+          <span class="owner-wrap">
+            <span class="mini-avatar">${initials(project.owner)}</span>
+            ${project.owner}
+          </span>
+          <span class="progress-wrap">
+            <span class="progress-bar">
+              <span class="progress-fill ${project.status}" style="width:${project.pct}%"></span>
+            </span>
+            ${project.pct}%
+          </span>
+          <span>${fmtDate(project.target)}</span>
+        </div>
+      </div>
+      <div class="task-list">${tasksHtml}</div>
+      <div class="card-footer">
+        <span class="feedback-label">Helpful?</span>
+        <button class="thumb-btn" id="up-${project.id}" onclick="thumb('${project.id}','up')">👍</button>
+        <button class="thumb-btn" id="dn-${project.id}" onclick="thumb('${project.id}','dn')">👎</button>
+        <span class="thanks-msg" id="thanks-${project.id}">Thanks — noted.</span>
+      </div>
+    </div>`;
+}
+
+function renderTiers() {
+  const container = document.getElementById('summary-tiers');
+  let html = '';
+
+  TIER_ORDER.forEach(tier => {
+    const projects = PROJECTS.filter(p => p.status === tier.key);
+    if (!projects.length) return;
+    html += `<div class="tier-section">
+      <div class="tier-header">
+        <span class="tier-label ${tier.key}">${tier.label}</span>
+        <span class="tier-count">· ${projects.length} project${projects.length !== 1 ? 's' : ''}</span>
+      </div>`;
+    projects.forEach(p => { html += buildProjectCard(p); });
+    html += '</div>';
+  });
+
+  container.innerHTML = html;
+}
+
+function renderCompleted() {
+  const section = document.getElementById('completed-section');
+  let html = '';
+  PROJECTS.filter(p => p.status === 'completed').forEach(p => { html += buildProjectCard(p); });
+  section.innerHTML = html;
+}
+
+renderTiers();
+renderCompleted();
+
+// ── Interactions ──
+
+function dismissTask(id) {
+  const row = document.getElementById('task-' + id);
+  if (row) {
+    row.classList.add('dismissed');
+    showToast('Item dismissed — removed from next week\'s summary');
+  }
+}
+
+function thumb(projectId, dir) {
+  const up = document.getElementById('up-' + projectId);
+  const dn = document.getElementById('dn-' + projectId);
+  const msg = document.getElementById('thanks-' + projectId);
+  up.classList.remove('active-up', 'active-down');
+  dn.classList.remove('active-up', 'active-down');
+  if (dir === 'up') up.classList.add('active-up');
+  else dn.classList.add('active-down');
+  msg.style.display = 'inline';
+}
+
+function toggleCompleted() {
+  const section = document.getElementById('completed-section');
+  const arrow = document.getElementById('completed-arrow');
+  const open = section.classList.toggle('open');
+  arrow.textContent = open ? '▾' : '▸';
+}
+
+function copyMarkdown() {
+  const lines = ['# Weekly Summary — GreenPath Studios Marketing Ops', '**Mon Apr 14, 2026**\n'];
+  TIER_ORDER.forEach(tier => {
+    const projects = PROJECTS.filter(p => p.status === tier.key);
+    if (!projects.length) return;
+    lines.push(`## ${tier.label} (${projects.length})`);
+    projects.forEach(p => {
+      lines.push(`\n### ${p.name} — ${p.owner} · ${p.pct}%`);
+      const flags = getFlaggedTasks(p.id);
+      if (flags.length) {
+        flags.forEach(t => {
+          lines.push(`- **${t.id}** ${t.title} · ${t.assignee === 'unassigned' ? '⚠ UNASSIGNED' : t.assignee} · ${fmtDate(t.due)}`);
+        });
+      } else {
+        lines.push('- No items flagged this week.');
+      }
+    });
+    lines.push('');
+  });
+  navigator.clipboard.writeText(lines.join('\n')).then(() => {
+    showToast('Copied to clipboard ✓');
+  }).catch(() => {
+    showToast('Copy not available in this browser context');
+  });
+}
+
+// ── Exit modal ──
+let modalShown = false;
+const exitTimer = setTimeout(() => {
+  if (!modalShown) openModal();
+}, 30000);
+
+function openModal() {
+  if (modalShown) return;
+  modalShown = true;
+  clearTimeout(exitTimer);
+  document.getElementById('exit-modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('exit-modal').classList.remove('open');
+}
+
+function pick(el, group) {
+  el.closest('.radio-row').querySelectorAll('.radio-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function submitModal() {
+  closeModal();
+  showToast('Response logged — thank you!');
+}
+
+// Close on backdrop click
+document.getElementById('exit-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+</script>
+</body>
+</html>

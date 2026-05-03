@@ -1,0 +1,913 @@
+[
+  {
+    "id": "easy-01",
+    "description": "Two roofing quotes — one with clear scope and permits, one with vague lump sum and no permit. Tests basic winner identification.",
+    "difficulty": "easy",
+    "input_data": {
+      "assessment_notes": "Single-family home, 1,800 sq ft asphalt shingle roof, approximately 20 years old. Active leak near chimney flashing. Priority is quality workmanship and warranty. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "Summit Roofing",
+          "vendor_id": "vendor-a",
+          "total_amount": 14200.00,
+          "calculated_total": 14200.00,
+          "sub_quotes": null,
+          "missing_items": ["Payment schedule not specified"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No milestone payment schedule"],
+          "summary": "Full tear-off and replacement with 30-year architectural shingles. Includes new underlayment, ice and water shield, and 10-year workmanship warranty."
+        },
+        {
+          "vendor_name": "FastFix Roofing",
+          "vendor_id": "vendor-b",
+          "total_amount": 10800.00,
+          "calculated_total": 10800.00,
+          "sub_quotes": null,
+          "missing_items": ["Permit status unclear", "Warranty terms not specified", "Underlayment type not stated", "No mention of decking inspection or replacement"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No permit mentioned", "No warranty stated", "Vague scope — single line item 'roof replacement'", "50% deposit required upfront"],
+          "summary": "Single line item estimate for roof replacement. Minimal detail on materials, scope, or warranty."
+        }
+      ]
+    }
+  },
+  {
+    "id": "easy-02",
+    "description": "Two exterior painting quotes — one fully itemized with material specs, one vague lump sum. Tests basic scope and clarity differentiation.",
+    "difficulty": "easy",
+    "input_data": {
+      "assessment_notes": "Two-story colonial, approximately 2,800 sq ft exterior. Wood siding, needs full prep, prime, and two-coat finish. Trim and shutters included in scope. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "ProCoat Painting",
+          "vendor_id": "vendor-a",
+          "total_amount": 6800.00,
+          "calculated_total": 6800.00,
+          "sub_quotes": [
+            {"option": "Prep & Prime", "amount": 1800.00, "description": "Full pressure wash, scrape loose paint, spot prime bare wood"},
+            {"option": "Body Coat", "amount": 3200.00, "description": "Two coats Sherwin-Williams Resilience, body color"},
+            {"option": "Trim & Shutters", "amount": 1800.00, "description": "Two coats trim paint, all shutters removed and reinstalled"}
+          ],
+          "missing_items": ["Paint sheen not specified for trim"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Paint sheen not confirmed for trim"],
+          "summary": "Fully itemized exterior painting quote with material specs and process detail. Clean scope with minor trim sheen gap."
+        },
+        {
+          "vendor_name": "QuickBrush LLC",
+          "vendor_id": "vendor-b",
+          "total_amount": 5200.00,
+          "calculated_total": 5200.00,
+          "sub_quotes": null,
+          "missing_items": ["Paint brand not specified", "Number of coats not stated", "Surface prep process unclear", "No mention of trim or shutters"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Single lump sum with no detail", "Paint product and coat count unconfirmed", "Unclear if trim and shutters are in scope"],
+          "summary": "Lump sum estimate with no itemization, no material specs, and ambiguous scope coverage for trim and shutters."
+        }
+      ]
+    }
+  },
+  {
+    "id": "easy-03",
+    "description": "Two water heater replacement quotes — one includes expansion tank and permit, one omits both. Tests whether model catches scope gaps that create code compliance risk.",
+    "difficulty": "easy",
+    "input_data": {
+      "assessment_notes": "40-gallon gas water heater, 12 years old, showing signs of corrosion at the base. Replacing like-for-like. Local code requires expansion tank on closed systems. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "Reliable Plumbing Co.",
+          "vendor_id": "vendor-a",
+          "total_amount": 1850.00,
+          "calculated_total": 1850.00,
+          "sub_quotes": [
+            {"option": "Water Heater Unit", "amount": 900.00, "description": "Rheem 40-gal gas, 9-year warranty"},
+            {"option": "Installation", "amount": 650.00, "description": "Remove and haul away old unit, install new, reconnect gas and water lines"},
+            {"option": "Expansion Tank & Permit", "amount": 300.00, "description": "Thermal expansion tank per local code, permit pulled and inspection scheduled"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": [],
+          "summary": "Complete water heater replacement including code-required expansion tank, permit, and inspection coordination. Fully scoped at mid-market price."
+        },
+        {
+          "vendor_name": "QuickFix Plumbers",
+          "vendor_id": "vendor-b",
+          "total_amount": 1350.00,
+          "calculated_total": 1350.00,
+          "sub_quotes": null,
+          "missing_items": ["Expansion tank not mentioned — required by local code", "No permit mentioned", "Water heater brand and warranty not specified"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Missing expansion tank creates code violation risk", "No permit may void homeowner insurance coverage for water damage", "Brand and warranty unknown"],
+          "summary": "Lower-cost quote missing critical code-required scope items. Appears less expensive but likely excludes work that will be required regardless."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-01",
+    "description": "Three HVAC replacement quotes at low, mid, and premium price points. Tests whether model correctly weighs scope completeness and permit clarity against price.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "1,600 sq ft single-story home. Existing gas furnace and central AC unit both 18 years old. Homeowner wants full system replacement. Concerned about long-term reliability and efficiency. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "ComfortPro HVAC",
+          "vendor_id": "vendor-a",
+          "total_amount": 11200.00,
+          "calculated_total": 11200.00,
+          "sub_quotes": null,
+          "missing_items": ["Labor warranty not explicitly stated"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Labor warranty not explicitly stated"],
+          "summary": "Full furnace and AC replacement with 16 SEER unit and 96% efficiency furnace. Includes duct inspection, new thermostat, and manufacturer 10-year parts warranty."
+        },
+        {
+          "vendor_name": "BudgetAir Services",
+          "vendor_id": "vendor-b",
+          "total_amount": 7400.00,
+          "calculated_total": 7400.00,
+          "sub_quotes": null,
+          "missing_items": ["Permit status unclear", "No duct work mentioned", "Equipment model and SEER rating not specified", "No thermostat replacement included"],
+          "permit_status": "Unclear",
+          "red_flags": ["Permit status not confirmed", "Equipment specs not listed", "No existing duct inspection mentioned"],
+          "summary": "Low-cost furnace and AC replacement. Minimal detail on equipment specs or scope inclusions."
+        },
+        {
+          "vendor_name": "PrecisionClimate",
+          "vendor_id": "vendor-c",
+          "total_amount": 13800.00,
+          "calculated_total": 13800.00,
+          "sub_quotes": null,
+          "missing_items": ["Timeline not specified"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No project timeline provided"],
+          "summary": "Premium 18 SEER system with variable-speed air handler, smart thermostat, full duct sealing, and 2-year labor warranty. Includes post-installation inspection."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-02",
+    "description": "Three kitchen remodel quotes with one outlier bid ~50% below others. Tests whether model correctly flags the anomaly and applies price-weighting logic.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "120 sq ft galley kitchen in a 1970s townhouse. Full scope: cabinet replacement, quartz countertops, LVP flooring, backsplash tile, appliance hookup. No structural changes. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "HomeStyle Renovations",
+          "vendor_id": "vendor-a",
+          "total_amount": 41500.00,
+          "calculated_total": 41500.00,
+          "sub_quotes": [
+            {"option": "Cabinetry & Hardware", "amount": 16000.00, "description": "Semi-custom cabinets, soft-close hardware, crown molding"},
+            {"option": "Countertops", "amount": 8500.00, "description": "3cm quartz with undermount sink cutout"},
+            {"option": "Flooring", "amount": 4200.00, "description": "LVP installation with transition strips"},
+            {"option": "Tile & Labor", "amount": 6800.00, "description": "Subway tile backsplash, full installation"},
+            {"option": "Appliance Hookup & Misc", "amount": 6000.00, "description": "Appliance connections, electrical, plumbing rough-ins"}
+          ],
+          "missing_items": ["Electrical permit status unclear"],
+          "permit_status": "Unclear",
+          "red_flags": ["Electrical permit status not confirmed"],
+          "summary": "Comprehensive kitchen remodel with fully itemized scope. Semi-custom cabinetry with quartz counters and complete material and labor breakdown."
+        },
+        {
+          "vendor_name": "QualityFirst Kitchens",
+          "vendor_id": "vendor-b",
+          "total_amount": 38200.00,
+          "calculated_total": 38200.00,
+          "sub_quotes": [
+            {"option": "Cabinets & Install", "amount": 14500.00, "description": "Stock cabinets with hardware, painted finish"},
+            {"option": "Countertops", "amount": 7800.00, "description": "Quartz countertops, standard edge"},
+            {"option": "Flooring & Tile", "amount": 9400.00, "description": "LVP flooring and ceramic backsplash"},
+            {"option": "Plumbing & Electrical", "amount": 6500.00, "description": "Hookups, outlet upgrades, under-cabinet lighting"}
+          ],
+          "missing_items": ["No mention of crown molding or finishing trim"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Stock cabinets may not match custom dimensions of existing space"],
+          "summary": "Competitive kitchen remodel with stock cabinetry and solid material selections. Clear permit commitment and detailed line items."
+        },
+        {
+          "vendor_name": "QuickFlip Contractors",
+          "vendor_id": "vendor-c",
+          "total_amount": 19500.00,
+          "calculated_total": 19500.00,
+          "sub_quotes": null,
+          "missing_items": ["No material specifications", "No flooring included", "No appliance hookup mentioned", "Labor rates not specified"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Price is approximately 50% below other bids for same stated scope", "No itemization — single lump sum", "No material specs or brands listed", "No permit mentioned", "No exclusions listed"],
+          "summary": "Single line-item estimate significantly below market rate for stated scope. No material specs, no permits, no itemization."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-03",
+    "description": "Three deck addition quotes — one with permit and engineering stamp, two without. Low risk tolerance homeowner with HOA permit requirement. Tests permit escalation for structural work.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "400 sq ft attached wood deck, second-story elevation, with stairs to grade. HOA requires permit documentation before construction begins. Neighbor had deck fail inspection last year. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "Craftsman Decks",
+          "vendor_id": "vendor-a",
+          "total_amount": 22400.00,
+          "calculated_total": 22400.00,
+          "sub_quotes": [
+            {"option": "Framing & Structure", "amount": 9800.00, "description": "Engineered drawings, permit pull, ledger attachment, post footings per code"},
+            {"option": "Decking Surface", "amount": 7600.00, "description": "Pressure-treated 5/4 deck boards, hidden fasteners"},
+            {"option": "Stairs & Railing", "amount": 5000.00, "description": "Code-compliant railing system, full stair run to grade"}
+          ],
+          "missing_items": ["Final inspection coordination not explicitly mentioned"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Final inspection scheduling not addressed"],
+          "summary": "Full-service deck build with engineered drawings, permit pull, and code-compliant framing. Highest bid but only quote addressing HOA and structural documentation requirements."
+        },
+        {
+          "vendor_name": "DeckPro Solutions",
+          "vendor_id": "vendor-b",
+          "total_amount": 17800.00,
+          "calculated_total": 17800.00,
+          "sub_quotes": [
+            {"option": "Deck Structure", "amount": 10200.00, "description": "Framing, posts, ledger board attachment"},
+            {"option": "Deck Surface & Stairs", "amount": 7600.00, "description": "Composite decking option available, stairs included"}
+          ],
+          "missing_items": ["Permit status not addressed", "No engineering stamp or drawings mentioned", "Footing depth not specified"],
+          "permit_status": "Unclear",
+          "red_flags": ["No permit confirmation for second-story structural work", "No engineering drawings — HOA requirement likely unmet", "Footing specs absent"],
+          "summary": "Competitive mid-range quote with detailed itemization but no permit confirmation and no engineering documentation — gaps that matter for HOA compliance."
+        },
+        {
+          "vendor_name": "Budget Builds",
+          "vendor_id": "vendor-c",
+          "total_amount": 13500.00,
+          "calculated_total": 13500.00,
+          "sub_quotes": null,
+          "missing_items": ["No permit mentioned", "No engineering documentation", "No footing or ledger specs", "No railing details"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No permits for elevated structural deck", "Single lump sum — no itemization", "No structural drawings", "HOA documentation requirement unaddressed"],
+          "summary": "Lowest bid with no permit, no engineering, and no itemization. Presents significant structural and HOA compliance risk."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-04",
+    "description": "Four interior painting quotes for a full home repaint with a wide price spread. High risk tolerance homeowner who prioritizes value. Tests that model gives extra weight to lower-cost options appropriately.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "Full interior repaint — 2,600 sq ft, 4 bed / 2.5 bath, all ceilings and walls. Existing paint in good condition, no major repairs needed. Homeowner prioritizes value over premium finish. Risk tolerance: High.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "Premier Interior Finishes",
+          "vendor_id": "vendor-a",
+          "total_amount": 9800.00,
+          "calculated_total": 9800.00,
+          "sub_quotes": [
+            {"option": "Walls & Ceilings", "amount": 6200.00, "description": "Two coats Benjamin Moore Aura, all rooms"},
+            {"option": "Trim & Doors", "amount": 2400.00, "description": "Semi-gloss trim paint, all doors both sides"},
+            {"option": "Prep & Protection", "amount": 1200.00, "description": "Full furniture move, floor protection, wall patch where needed"}
+          ],
+          "missing_items": [],
+          "permit_status": "No permit mentioned",
+          "red_flags": [],
+          "summary": "Premium full-home paint package with high-end materials, full furniture moving, and comprehensive prep. Highest bid."
+        },
+        {
+          "vendor_name": "ColorRight Painters",
+          "vendor_id": "vendor-b",
+          "total_amount": 6400.00,
+          "calculated_total": 6400.00,
+          "sub_quotes": [
+            {"option": "Walls & Ceilings", "amount": 4400.00, "description": "Two coats Sherwin-Williams SuperPaint"},
+            {"option": "Trim", "amount": 1400.00, "description": "One coat semi-gloss trim, doors not included"},
+            {"option": "Basic Prep", "amount": 600.00, "description": "Light furniture move, drop cloths"}
+          ],
+          "missing_items": ["Doors not included in trim scope"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Doors excluded from scope — will require separate coordination or add-on"],
+          "summary": "Mid-range quote with solid materials and clear scope. Door painting excluded, which needs separate pricing."
+        },
+        {
+          "vendor_name": "ValuePaint Crew",
+          "vendor_id": "vendor-c",
+          "total_amount": 4200.00,
+          "calculated_total": 4200.00,
+          "sub_quotes": null,
+          "missing_items": ["Paint brand not specified", "Number of coats unclear", "Trim and door scope ambiguous", "Furniture moving not confirmed"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Unspecified paint brand — quality unknown", "Coat count not stated", "Scope gaps on trim and doors"],
+          "summary": "Budget quote with significant detail gaps. Low price but material quality and full scope coverage are unconfirmed."
+        },
+        {
+          "vendor_name": "BudgetBrush Express",
+          "vendor_id": "vendor-d",
+          "total_amount": 3100.00,
+          "calculated_total": 3100.00,
+          "sub_quotes": null,
+          "missing_items": ["No materials specified", "No scope detail", "No mention of prep, trim, or ceilings", "No timeline"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Lowest bid by significant margin", "No scope detail — cannot determine what is included", "High change-order risk"],
+          "summary": "Minimal lump sum quote. Unable to evaluate scope coverage or material quality from information provided."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-05",
+    "description": "Two concrete driveway replacement quotes — one includes demo and haul-away explicitly, one does not mention it. Tests whether model catches the hidden scope gap that changes the true cost comparison.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "Existing 800 sq ft cracked concrete driveway, full replacement needed. Two-car width, standard residential. No drainage issues. Homeowner wants a clean, all-in price with no surprises. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "SolidGround Concrete",
+          "vendor_id": "vendor-a",
+          "total_amount": 8600.00,
+          "calculated_total": 8600.00,
+          "sub_quotes": [
+            {"option": "Demo & Haul-Away", "amount": 1800.00, "description": "Full demolition of existing concrete, haul-away, and subgrade prep"},
+            {"option": "New Concrete Pour", "amount": 5600.00, "description": "4-inch reinforced concrete with wire mesh, control joints cut"},
+            {"option": "Finish & Seal", "amount": 1200.00, "description": "Broom finish, cure compound, 2-year warranty"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": [],
+          "summary": "Complete driveway replacement with demo, pour, finish, and seal. Fully scoped all-in price with permit."
+        },
+        {
+          "vendor_name": "FastPour Contractors",
+          "vendor_id": "vendor-b",
+          "total_amount": 5900.00,
+          "calculated_total": 5900.00,
+          "sub_quotes": null,
+          "missing_items": ["Demo and haul-away not mentioned — existing concrete removal may be excluded", "Reinforcement type not specified", "No warranty stated"],
+          "permit_status": "Unclear",
+          "red_flags": ["Demo exclusion risk — if not included, true total cost rises significantly and may exceed vendor-a", "No warranty", "Permit status unconfirmed"],
+          "summary": "Lower quoted price that likely excludes demo and haul-away — a significant cost that would close or reverse the apparent price gap with vendor-a."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-06",
+    "description": "Three fence installation quotes — one explicitly uses HOA-prohibited pressure-treated pine, one unspecified material, one confirmed cedar. Risk tolerance: Low with HOA material requirements.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "220 linear feet of 6-foot privacy fence, wood, replacing existing rotted fence. HOA CC&Rs require cedar or redwood — pressure-treated pine is explicitly prohibited. Front corner posts need concrete footings per HOA. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "Cedar Ridge Fencing",
+          "vendor_id": "vendor-a",
+          "total_amount": 9400.00,
+          "calculated_total": 9400.00,
+          "sub_quotes": [
+            {"option": "Cedar Fence Panels", "amount": 6200.00, "description": "Western red cedar dog-ear panels, 220 LF"},
+            {"option": "Posts & Footings", "amount": 2400.00, "description": "4x4 cedar posts, concrete footings at all corners and 8-ft intervals"},
+            {"option": "Demo & Haul", "amount": 800.00, "description": "Remove and haul existing fence"}
+          ],
+          "missing_items": ["HOA submission documentation not offered"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No mention of HOA approval documentation service"],
+          "summary": "Western red cedar fence matching HOA specifications with permit, concrete footings, and demo included. Clean scope."
+        },
+        {
+          "vendor_name": "AllFence Solutions",
+          "vendor_id": "vendor-b",
+          "total_amount": 7800.00,
+          "calculated_total": 7800.00,
+          "sub_quotes": [
+            {"option": "Fence Installation", "amount": 6400.00, "description": "Privacy fence panels, posts, hardware"},
+            {"option": "Demo", "amount": 1400.00, "description": "Tear down and dispose of existing fence"}
+          ],
+          "missing_items": ["Lumber species not specified — may not meet HOA cedar/redwood requirement", "Footing method not specified"],
+          "permit_status": "Unclear",
+          "red_flags": ["Lumber species unspecified — HOA compliance unverified", "No permit confirmation"],
+          "summary": "Mid-range quote without confirmed lumber species. HOA compliance cannot be verified without clarification."
+        },
+        {
+          "vendor_name": "BudgetFence Co.",
+          "vendor_id": "vendor-c",
+          "total_amount": 5200.00,
+          "calculated_total": 5200.00,
+          "sub_quotes": null,
+          "missing_items": ["Lumber type not stated", "No footing detail", "Demo not mentioned", "Permit status not addressed"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Pressure-treated pine likely — explicitly prohibited by HOA CC&Rs", "No demo included in price", "No permit", "If rejected by HOA, full removal and replacement at homeowner expense"],
+          "summary": "Lowest bid but likely uses HOA-prohibited materials. Installation and subsequent forced removal would cost more than any other vendor."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-07",
+    "description": "Three shower tile replacement quotes — one includes waterproofing membrane, two do not. Tests whether model identifies the waterproofing gap as a long-term structural and liability risk.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "Master bath shower, full tile replacement, 60 sq ft floor and walls. Previous grout has failed in spots and homeowner suspects moisture behind tile. Wants a lasting result. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "ProTile & Waterproofing",
+          "vendor_id": "vendor-a",
+          "total_amount": 4800.00,
+          "calculated_total": 4800.00,
+          "sub_quotes": [
+            {"option": "Demo & Moisture Assessment", "amount": 800.00, "description": "Full tile demo, inspect backer board, replace any damaged substrate"},
+            {"option": "Waterproofing Membrane", "amount": 900.00, "description": "Schluter KERDI membrane applied to all shower surfaces before tile"},
+            {"option": "Tile Install & Grout", "amount": 3100.00, "description": "Porcelain tile, unsanded grout, silicone at all corners"}
+          ],
+          "missing_items": [],
+          "permit_status": "No permit mentioned",
+          "red_flags": [],
+          "summary": "Complete shower tile replacement with professional waterproofing membrane and substrate inspection. Most comprehensive quote."
+        },
+        {
+          "vendor_name": "ValueTile Pros",
+          "vendor_id": "vendor-b",
+          "total_amount": 3400.00,
+          "calculated_total": 3400.00,
+          "sub_quotes": [
+            {"option": "Demo & Prep", "amount": 600.00, "description": "Remove existing tile, light surface prep"},
+            {"option": "Tile Install", "amount": 2800.00, "description": "Tile installation on existing backer board, grout and seal"}
+          ],
+          "missing_items": ["No waterproofing membrane included", "No moisture or substrate inspection mentioned"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No waterproofing membrane — tile over failed substrate without proper moisture barrier risks repeat failure within 2-5 years", "Existing moisture damage not addressed"],
+          "summary": "Mid-range quote that installs over existing substrate without waterproofing. Given the noted moisture concerns, this approach risks repeating the same failure."
+        },
+        {
+          "vendor_name": "QuickTile Express",
+          "vendor_id": "vendor-c",
+          "total_amount": 2600.00,
+          "calculated_total": 2600.00,
+          "sub_quotes": null,
+          "missing_items": ["No demo mentioned", "No waterproofing", "No substrate assessment", "Tile type not specified"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No demo — tile may be installed over existing failed tile", "No waterproofing or moisture assessment", "Cannot determine actual scope from quote"],
+          "summary": "Lowest bid with minimal detail. Unclear whether existing tile is even being removed. Highest risk of near-term failure given stated moisture concerns."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-08",
+    "description": "Two quotes for a whole-home window replacement (12 windows). One vendor bundles installation with a manufacturer warranty, the other installs third-party windows with no warranty coordination. Tests warranty-gap identification.",
+    "difficulty": "realistic",
+    "input_data": {
+      "assessment_notes": "Replace all 12 double-hung windows in a 1990s colonial. Current windows are fogged and showing seal failure. Homeowner wants windows that will last and has had warranty issues with contractors before. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "ClearView Window Co.",
+          "vendor_id": "vendor-a",
+          "total_amount": 18600.00,
+          "calculated_total": 18600.00,
+          "sub_quotes": [
+            {"option": "Andersen 400 Series Windows (12)", "amount": 13200.00, "description": "Andersen factory-direct windows, 20-year transferable manufacturer warranty"},
+            {"option": "Installation & Trim", "amount": 4200.00, "description": "Professional installation, interior and exterior trim restoration"},
+            {"option": "Haul-Away & Cleanup", "amount": 1200.00, "description": "Remove and dispose all old windows, full job site cleanup"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": [],
+          "summary": "Authorized Andersen dealer installation with 20-year transferable warranty, permit, and full cleanup. Highest bid but comprehensive coverage."
+        },
+        {
+          "vendor_name": "BudgetWindow Solutions",
+          "vendor_id": "vendor-b",
+          "total_amount": 13400.00,
+          "calculated_total": 13400.00,
+          "sub_quotes": null,
+          "missing_items": ["Window brand and model not specified", "Warranty terms not stated", "No mention of transferable warranty", "Installation warranty not addressed"],
+          "permit_status": "Unclear",
+          "red_flags": ["Window brand unknown — quality and warranty unverifiable", "No transferable warranty means coverage does not pass to future buyer", "Permit status unconfirmed"],
+          "summary": "Lower bid with unspecified windows and no warranty detail. Given homeowner's prior warranty issues, the absence of warranty terms is a meaningful gap."
+        }
+      ]
+    }
+  },
+  {
+    "id": "hard-01",
+    "description": "Four electrical quotes for a 3-unit property with insurance deadline. One vendor has partial scope on Unit 3 that may not satisfy insurer. Tests risk prioritization under time pressure.",
+    "difficulty": "hard",
+    "input_data": {
+      "assessment_notes": "Three-unit residential property (duplex + basement unit). Full knob-and-tube wiring replacement required across all units per insurance carrier notice. Each unit needs panel upgrade and new circuit installation. Insurance policy renewal in 90 days — work must be completed and inspected by then. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "Metro Electric",
+          "vendor_id": "vendor-a",
+          "total_amount": 68500.00,
+          "calculated_total": 68500.00,
+          "sub_quotes": [
+            {"option": "Unit 1", "amount": 21200.00, "description": "Full K&T replacement, 200A panel upgrade, permit included"},
+            {"option": "Unit 2", "amount": 24800.00, "description": "Full K&T replacement, 200A panel upgrade, larger unit with finished basement"},
+            {"option": "Unit 3", "amount": 22500.00, "description": "Full K&T replacement, 100A panel, basement unit"}
+          ],
+          "missing_items": ["No project timeline stated", "Payment terms not specified"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No project timeline — insurance deadline at risk", "Payment milestone schedule missing"],
+          "summary": "Comprehensive K&T replacement across all three units with panel upgrades. Fully itemized by unit. Will pull permits. No timeline provided despite noted insurance deadline."
+        },
+        {
+          "vendor_name": "Spark Solutions",
+          "vendor_id": "vendor-b",
+          "total_amount": 54200.00,
+          "calculated_total": 54200.00,
+          "sub_quotes": [
+            {"option": "Units 1 & 2", "amount": 38500.00, "description": "K&T replacement for upper two units, panel upgrades included"},
+            {"option": "Unit 3", "amount": 15700.00, "description": "Partial K&T replacement, panel upgrade — excludes finished wall areas"}
+          ],
+          "missing_items": ["Unit 3 scope explicitly excludes finished wall areas — incomplete remediation", "No inspection sign-off process described"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Unit 3 exclusion of finished wall areas may not satisfy insurance carrier requirements", "Partial scope on Unit 3 could trigger policy rejection"],
+          "summary": "Lower bid with full scope on Units 1 and 2 but explicit exclusion on Unit 3 finished wall areas. Insurance compliance risk on Unit 3."
+        },
+        {
+          "vendor_name": "Reliable Wiring Co.",
+          "vendor_id": "vendor-c",
+          "total_amount": 71800.00,
+          "calculated_total": 71800.00,
+          "sub_quotes": [
+            {"option": "All Units — Full Replacement", "amount": 62000.00, "description": "Complete K&T removal and replacement across all three units"},
+            {"option": "Panel Upgrades", "amount": 9800.00, "description": "200A panel upgrades for all three units, includes permits and inspection coordination"}
+          ],
+          "missing_items": ["No unit-by-unit breakdown — difficult to verify per-unit coverage for insurer"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No per-unit breakdown makes it harder to confirm full compliance per insurance requirements"],
+          "summary": "Highest bid with comprehensive scope and explicit inspection coordination. Will pull permits. No per-unit breakdown."
+        },
+        {
+          "vendor_name": "FastWire Electric",
+          "vendor_id": "vendor-d",
+          "total_amount": 39000.00,
+          "calculated_total": 39000.00,
+          "sub_quotes": null,
+          "missing_items": ["No permit mentioned", "No unit breakdown", "Panel upgrade not mentioned", "No warranty or inspection process described"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No permits — automatic failure for insurance compliance", "Single lump sum with no scope detail", "Significantly below market for 3-unit K&T replacement", "Panel upgrades not confirmed"],
+          "summary": "Lowest bid by a wide margin. Single lump sum with no itemization, no permit commitment, and no panel upgrade confirmation. Highest risk for insurance compliance."
+        }
+      ]
+    }
+  },
+  {
+    "id": "hard-02",
+    "description": "Five roofing quotes following hail damage. Insurance adjuster report specifies Class 4 shingles, synthetic underlayment, ice shield, and drip edge. Tests whether model flags quotes that fail to meet the insurance spec.",
+    "difficulty": "hard",
+    "input_data": {
+      "assessment_notes": "2,400 sq ft ranch, hail damage across full roof. Insurance adjuster report specifies: Class 4 impact-resistant shingles, synthetic underlayment, drip edge replacement, and ice and water shield at all eaves. Approved claim amount: $18,400. Any upgrade cost is homeowner responsibility. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "StormGuard Roofing",
+          "vendor_id": "vendor-a",
+          "total_amount": 18900.00,
+          "calculated_total": 18900.00,
+          "sub_quotes": [
+            {"option": "Class 4 IR Shingles", "amount": 9200.00, "description": "GAF Timberline ArmorShield II, Class 4, 30-year warranty"},
+            {"option": "Underlayment & Accessories", "amount": 5400.00, "description": "Synthetic underlayment, ice and water shield at all eaves, new drip edge"},
+            {"option": "Labor & Tearoff", "amount": 4300.00, "description": "Full tearoff, haul-away, installation, cleanup"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": ["$500 above claim amount — homeowner owes the difference"],
+          "summary": "Fully insurance-compliant quote meeting all adjuster-specified materials. $500 over claim amount."
+        },
+        {
+          "vendor_name": "QuickRoof Pros",
+          "vendor_id": "vendor-b",
+          "total_amount": 17600.00,
+          "calculated_total": 17600.00,
+          "sub_quotes": [
+            {"option": "Shingle Replacement", "amount": 10800.00, "description": "Owens Corning Duration — impact resistance rating not specified"},
+            {"option": "Underlayment & Labor", "amount": 6800.00, "description": "Felt underlayment, labor and tearoff"}
+          ],
+          "missing_items": ["Impact resistance rating not confirmed — Class 4 required", "Synthetic underlayment not specified — felt used instead", "Ice and water shield not mentioned", "Drip edge replacement not mentioned"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Impact rating unconfirmed — insurance may reject claim payout", "Felt underlayment does not meet adjuster spec", "Ice and water shield absent", "Drip edge not addressed"],
+          "summary": "Within claim amount but fails to meet multiple adjuster-specified material requirements. Insurance non-payment risk."
+        },
+        {
+          "vendor_name": "ValueRoof Inc.",
+          "vendor_id": "vendor-c",
+          "total_amount": 15200.00,
+          "calculated_total": 15200.00,
+          "sub_quotes": null,
+          "missing_items": ["No material specifications", "No impact rating", "No mention of underlayment type, ice shield, or drip edge"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No material specs — likely does not meet insurance requirements", "No permit", "If insurance rejects, homeowner absorbs full cost"],
+          "summary": "Lowest bid with unspecified materials likely falling short of insurance requirements. High risk of claim rejection."
+        },
+        {
+          "vendor_name": "Elite Roofing Group",
+          "vendor_id": "vendor-d",
+          "total_amount": 23500.00,
+          "calculated_total": 23500.00,
+          "sub_quotes": [
+            {"option": "Class 4 IR Shingles", "amount": 11000.00, "description": "CertainTeed Landmark IR, Class 4, lifetime limited warranty"},
+            {"option": "Premium Accessories", "amount": 7200.00, "description": "Synthetic underlayment, full ice and water shield (not just eaves), drip edge, ridge vent upgrade"},
+            {"option": "Labor & Tearoff", "amount": 5300.00, "description": "Full tearoff, new plywood inspection, cleanup"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": ["$5,100 above insurance claim — significant homeowner out-of-pocket for upgrades"],
+          "summary": "Fully compliant plus upgrades including lifetime shingles and full ice shield beyond eaves-only. Highest bid with meaningful out-of-pocket over claim amount."
+        },
+        {
+          "vendor_name": "HomeFix Contractors",
+          "vendor_id": "vendor-e",
+          "total_amount": 19200.00,
+          "calculated_total": 19200.00,
+          "sub_quotes": [
+            {"option": "Class 4 Shingles & Labor", "amount": 15800.00, "description": "GAF ArmorShield II Class 4 shingles, labor included"},
+            {"option": "Underlayment Package", "amount": 3400.00, "description": "Synthetic underlayment and drip edge — ice and water shield not included"}
+          ],
+          "missing_items": ["Ice and water shield not included — required by adjuster"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Ice and water shield excluded — adjuster specification not fully met", "Partial compliance may affect claim reimbursement"],
+          "summary": "Mostly compliant but explicitly excludes the ice and water shield required by the insurance adjuster. Partial claim non-payment risk."
+        }
+      ]
+    }
+  },
+  {
+    "id": "hard-03",
+    "description": "Three foundation repair quotes using different methods. Structural engineer report specifies helical piers. One vendor deviates on pier count, one uses an unsupported alternative method. Risk tolerance: Low with pending home sale.",
+    "difficulty": "hard",
+    "input_data": {
+      "assessment_notes": "Residential home with 1.5-inch differential settlement at northwest corner. Independent structural engineer report recommends helical pier installation, minimum 6 piers, to reach load-bearing soil. Engineer will re-inspect post-repair. Homeowner is selling in 6 months and needs a transferable warranty for buyer's lender. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "PierTech Foundation",
+          "vendor_id": "vendor-a",
+          "total_amount": 14800.00,
+          "calculated_total": 14800.00,
+          "sub_quotes": [
+            {"option": "Helical Pier Installation (6 piers)", "amount": 11400.00, "description": "6 helical piers per engineer spec, driven to load-bearing soil, torque-verified"},
+            {"option": "Lift & Re-level", "amount": 2200.00, "description": "Hydraulic lift to specified tolerance, re-level per engineer plan"},
+            {"option": "Engineer Re-inspection Coordination", "amount": 1200.00, "description": "Coordinate with homeowner's structural engineer for post-repair sign-off"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": [],
+          "summary": "Matches engineer-specified method and pier count exactly. Includes permit, transferable warranty, and engineer coordination for post-repair sign-off. Highest bid but fully spec-compliant."
+        },
+        {
+          "vendor_name": "StableBase Repairs",
+          "vendor_id": "vendor-b",
+          "total_amount": 11200.00,
+          "calculated_total": 11200.00,
+          "sub_quotes": [
+            {"option": "Helical Pier Installation", "amount": 9000.00, "description": "5 helical piers — contractor recommends 5 vs engineer-specified 6"},
+            {"option": "Lift & Stabilization", "amount": 2200.00, "description": "Lift and level per their standard tolerance"}
+          ],
+          "missing_items": ["Only 5 piers vs 6 specified by engineer", "No engineer re-inspection coordination", "Transferable warranty not confirmed"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Fewer piers than engineer spec — deviation may void warranty or fail re-inspection", "No engineer coordination — post-repair sign-off at risk, which could delay home sale"],
+          "summary": "Lower bid using helical piers but deviates from engineer-specified pier count. Engineer re-inspection may fail, which would delay the home sale."
+        },
+        {
+          "vendor_name": "BudgetFoundation Fix",
+          "vendor_id": "vendor-c",
+          "total_amount": 5400.00,
+          "calculated_total": 5400.00,
+          "sub_quotes": null,
+          "missing_items": ["Uses mudjacking — not the method specified by engineer", "No permit mentioned", "No engineer coordination", "Transferable warranty not available for this method"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Mudjacking does not address root cause of differential settlement per engineer report", "Method substitution without engineer approval invalidates the engineer's report", "Will not satisfy buyer's lender or inspector at home sale", "No permit"],
+          "summary": "Significantly lower bid using a method not recommended by the structural engineer. Will not satisfy the engineer re-inspection requirement and likely cannot produce a transferable warranty."
+        }
+      ]
+    }
+  },
+  {
+    "id": "hard-04",
+    "description": "Three bathroom remodel quotes in a pre-1978 home where EPA RRP lead-safe practices are legally required. Only one quote addresses it. Tests whether model treats regulatory non-compliance as a deal-breaker regardless of price.",
+    "difficulty": "hard",
+    "input_data": {
+      "assessment_notes": "Full master bathroom remodel — tile replacement, new vanity, toilet, and shower door. Home built in 1962. Contractors will be disturbing existing walls and tile. EPA Renovation, Repair, and Painting (RRP) Rule requires lead-safe work practices when disturbing painted surfaces in pre-1978 homes. Risk tolerance: Low.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "GreenSafe Remodeling",
+          "vendor_id": "vendor-a",
+          "total_amount": 19800.00,
+          "calculated_total": 19800.00,
+          "sub_quotes": [
+            {"option": "Lead Paint Assessment & Containment", "amount": 1800.00, "description": "EPA-certified RRP test prior to demo, lead-safe work practices and proper disposal if positive"},
+            {"option": "Tile Removal & Demo", "amount": 2600.00, "description": "Full tile removal under lead-safe containment if required"},
+            {"option": "Tile Install & Fixtures", "amount": 15400.00, "description": "New tile, vanity, toilet, shower door, plumbing hookup"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": [],
+          "summary": "Only quote that addresses EPA RRP lead-safe requirements. Highest bid but includes legally required testing and safe handling practices for a pre-1978 home."
+        },
+        {
+          "vendor_name": "BathReno Pro",
+          "vendor_id": "vendor-b",
+          "total_amount": 16200.00,
+          "calculated_total": 16200.00,
+          "sub_quotes": [
+            {"option": "Demo & Prep", "amount": 3200.00, "description": "Full tile demo, wall prep"},
+            {"option": "Tile & Fixtures", "amount": 13000.00, "description": "Tile install, vanity, toilet, shower door"}
+          ],
+          "missing_items": ["No mention of lead paint assessment or RRP compliance", "No pre-1978 home protocols referenced"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No lead-safe protocol on pre-1978 home — federal EPA RRP rule violation risk", "Contractor may not be EPA RRP certified — homeowner legal and health liability"],
+          "summary": "Competitive mid-range quote with no acknowledgment of lead paint risk. EPA RRP compliance gap is a federal violation risk and a health risk for occupants."
+        },
+        {
+          "vendor_name": "ValueBath Contractors",
+          "vendor_id": "vendor-c",
+          "total_amount": 13500.00,
+          "calculated_total": 13500.00,
+          "sub_quotes": null,
+          "missing_items": ["No lead paint mention", "No RRP compliance", "No permit mentioned", "No material specs"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No lead-safe protocol on pre-1978 home", "No permit", "Lowest bid likely excludes required regulatory compliance costs entirely"],
+          "summary": "Lowest bid with no permit and no lead paint protocol. Creates both federal legal exposure and health risk for homeowner and occupants in a pre-1978 home."
+        }
+      ]
+    }
+  },
+  {
+    "id": "adversarial-01",
+    "description": "Only one vendor provided. Tests that the model does not fabricate a comparison or invent benchmark prices to fill the gap.",
+    "difficulty": "adversarial",
+    "input_data": {
+      "assessment_notes": "Homeowner received only one quote for a bathroom remodel (tile replacement, vanity swap, toilet replacement). No prior quotes or budget established. Risk tolerance: High.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "ProBath Renovations",
+          "vendor_id": "vendor-a",
+          "total_amount": 8400.00,
+          "calculated_total": 8400.00,
+          "sub_quotes": null,
+          "missing_items": ["No permit mentioned", "No project timeline", "No warranty terms", "Grout type not specified"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["No permit mentioned for potential plumbing work", "No warranty terms", "No project timeline"],
+          "summary": "Single lump sum for full bathroom tile replacement, vanity replacement, and toilet swap. Minimal detail on materials or timeline."
+        }
+      ]
+    }
+  },
+  {
+    "id": "adversarial-02",
+    "description": "Two quotes where assessment notes specify a hard move-in deadline, but neither quote includes a timeline. Tests whether model escalates the deadline risk as a deal-breaker, not a minor flag.",
+    "difficulty": "adversarial",
+    "input_data": {
+      "assessment_notes": "Homeowner needs HVAC replacement completed before August 1 — tenant move-in date is fixed and lease is signed. Current date is June 15. Neither contractor has been asked about availability. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "CoolBreeze HVAC",
+          "vendor_id": "vendor-a",
+          "total_amount": 9400.00,
+          "calculated_total": 9400.00,
+          "sub_quotes": [
+            {"option": "Equipment", "amount": 5200.00, "description": "Carrier 16 SEER split system, 10-year parts warranty"},
+            {"option": "Installation", "amount": 4200.00, "description": "Full installation, permits, startup and testing"}
+          ],
+          "missing_items": ["No project timeline or start date provided"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No timeline provided — 46-day window to August 1 deadline is at risk if scheduling not confirmed immediately"],
+          "summary": "Well-scoped HVAC replacement with solid warranty and permit, but no timeline despite a hard August 1 deadline in the assessment notes."
+        },
+        {
+          "vendor_name": "AirPro Services",
+          "vendor_id": "vendor-b",
+          "total_amount": 8800.00,
+          "calculated_total": 8800.00,
+          "sub_quotes": null,
+          "missing_items": ["No timeline or availability window", "Equipment model not specified", "Warranty terms not stated"],
+          "permit_status": "Unclear",
+          "red_flags": ["No timeline — same August 1 deadline risk as vendor-a", "Permit status unclear", "Equipment and warranty unspecified"],
+          "summary": "Lower-cost quote with significant data gaps including no timeline, unspecified equipment, and unclear permit status. Deadline risk compounded by missing scope detail."
+        }
+      ]
+    }
+  },
+  {
+    "id": "adversarial-03",
+    "description": "One vendor's sub_quote line items sum to $28,400 but total_amount is listed as $24,000 — a $4,400 discrepancy. Tests whether model catches and flags the math error before recommending.",
+    "difficulty": "adversarial",
+    "input_data": {
+      "assessment_notes": "Full kitchen remodel, 180 sq ft, gut renovation including new cabinets, counters, appliances, and flooring. Homeowner has a fixed budget of $45,000. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "Precision Kitchen Co.",
+          "vendor_id": "vendor-a",
+          "total_amount": 24000.00,
+          "calculated_total": 28400.00,
+          "sub_quotes": [
+            {"option": "Cabinetry", "amount": 11200.00, "description": "Semi-custom cabinets, soft-close hinges, crown molding"},
+            {"option": "Countertops", "amount": 7400.00, "description": "Quartz countertops, undermount sink cutout"},
+            {"option": "Flooring", "amount": 4800.00, "description": "LVP installation with underlayment"},
+            {"option": "Appliance Hookup & Misc", "amount": 5000.00, "description": "Plumbing, electrical, appliance connections"}
+          ],
+          "missing_items": ["Discrepancy between sub_quote total ($28,400) and stated total_amount ($24,000) — requires clarification before signing"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["Sub_quote line items sum to $28,400 but total_amount is listed as $24,000 — $4,400 unexplained discrepancy that must be resolved before contract execution"],
+          "summary": "Detailed kitchen remodel quote with a pricing discrepancy between line items and total that must be clarified before this quote can be relied upon."
+        },
+        {
+          "vendor_name": "HomeStyle Renovations",
+          "vendor_id": "vendor-b",
+          "total_amount": 38500.00,
+          "calculated_total": 38500.00,
+          "sub_quotes": [
+            {"option": "Cabinetry & Hardware", "amount": 15000.00, "description": "Full custom cabinets with pull-out shelves"},
+            {"option": "Countertops", "amount": 9200.00, "description": "Quartzite slab countertops"},
+            {"option": "Flooring", "amount": 6800.00, "description": "Hardwood floor installation"},
+            {"option": "Labor & Misc", "amount": 7500.00, "description": "Plumbing, electrical, project management"}
+          ],
+          "missing_items": ["Timeline not specified"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["No project timeline"],
+          "summary": "Premium full-service kitchen remodel with custom cabinets and natural stone. Exceeds stated $45K budget."
+        }
+      ]
+    }
+  },
+  {
+    "id": "adversarial-04",
+    "description": "High risk tolerance homeowner, but one quote involves unpermitted electrical panel work — illegal in all U.S. jurisdictions. Tests that model escalates absolute legal deal-breakers regardless of stated risk tolerance.",
+    "difficulty": "adversarial",
+    "input_data": {
+      "assessment_notes": "200A electrical panel upgrade and whole-home rewire, 1,400 sq ft. Homeowner wants the cheapest option and is explicitly willing to accept risk to save money. Risk tolerance: High.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "CertifiedWire Electric",
+          "vendor_id": "vendor-a",
+          "total_amount": 14800.00,
+          "calculated_total": 14800.00,
+          "sub_quotes": [
+            {"option": "Panel Upgrade", "amount": 3200.00, "description": "200A panel, permit, utility notification, inspection"},
+            {"option": "Whole-Home Rewire", "amount": 11600.00, "description": "Full rewire to code, all circuits labeled, GFCI/AFCI where required"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": [],
+          "summary": "Code-compliant full rewire and panel upgrade. Licensed contractor with permit and inspection included."
+        },
+        {
+          "vendor_name": "FastWire Unlicensed",
+          "vendor_id": "vendor-b",
+          "total_amount": 7200.00,
+          "calculated_total": 7200.00,
+          "sub_quotes": null,
+          "missing_items": ["No permit", "Contractor licensing status not stated", "Inspection not included", "No warranty"],
+          "permit_status": "No permit mentioned",
+          "red_flags": ["Electrical panel work without permit is illegal in all U.S. jurisdictions — homeowner insurance is voided in the event of fire", "Unlicensed electrical work creates irreversible safety and resale risk", "No inspection means no recourse if work fails", "Price 51% below licensed quote strongly suggests unlicensed contractor"],
+          "summary": "Significantly below-market quote with no permit and no confirmed licensing. Electrical work without a permit creates legal, safety, and insurance void exposure that risk tolerance cannot offset."
+        }
+      ]
+    }
+  },
+  {
+    "id": "adversarial-05",
+    "description": "Three quotes with identical total prices but completely different scope. No price-based differentiation. Tests whether model recommends based on scope completeness and risk alone.",
+    "difficulty": "adversarial",
+    "input_data": {
+      "assessment_notes": "Replace 18-year-old HVAC system in a 1,900 sq ft two-story home. All three vendors were given a fixed price target of $10,500. Homeowner wants best value within that number. Risk tolerance: Medium.",
+      "evaluated_quotes": [
+        {
+          "vendor_name": "PremiumComfort HVAC",
+          "vendor_id": "vendor-a",
+          "total_amount": 10500.00,
+          "calculated_total": 10500.00,
+          "sub_quotes": [
+            {"option": "Equipment", "amount": 5800.00, "description": "16 SEER split system, 10-year manufacturer warranty, smart thermostat included"},
+            {"option": "Installation", "amount": 3200.00, "description": "Full installation, duct inspection, system commissioning"},
+            {"option": "Permits & Service", "amount": 1500.00, "description": "Permit, 2-year labor warranty, 24/7 service line"}
+          ],
+          "missing_items": [],
+          "permit_status": "Will pull permits",
+          "red_flags": [],
+          "summary": "Full-scope HVAC replacement at the agreed price. Best equipment tier, permit, smart thermostat, and 2-year labor warranty."
+        },
+        {
+          "vendor_name": "StandardAir Services",
+          "vendor_id": "vendor-b",
+          "total_amount": 10500.00,
+          "calculated_total": 10500.00,
+          "sub_quotes": [
+            {"option": "Equipment & Install", "amount": 9500.00, "description": "14 SEER unit, standard thermostat, installation"},
+            {"option": "Permit", "amount": 1000.00, "description": "Permit pull only"}
+          ],
+          "missing_items": ["No labor warranty stated", "No duct inspection", "Lower SEER rating (14 vs 16)"],
+          "permit_status": "Will pull permits",
+          "red_flags": ["14 SEER is minimum code — no efficiency advantage", "No labor warranty — post-install repair costs uncovered"],
+          "summary": "Same price as vendor-a but lower SEER rating and no labor warranty. Meets minimum requirements but delivers less long-term value."
+        },
+        {
+          "vendor_name": "BudgetAir Direct",
+          "vendor_id": "vendor-c",
+          "total_amount": 10500.00,
+          "calculated_total": 10500.00,
+          "sub_quotes": null,
+          "missing_items": ["Equipment model unknown", "SEER rating not specified", "Permit status unclear", "No warranty mentioned", "No duct work or inspection mentioned"],
+          "permit_status": "Unclear",
+          "red_flags": ["Equipment specs unknown at stated price — value cannot be verified", "Permit unclear", "No warranty of any kind"],
+          "summary": "Same price but no scope detail provided. Cannot verify what equipment or services are included. Highest opacity at the same price point."
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,196 @@
+[
+  {
+    "id": "easy-01",
+    "description": "Two roofing quotes with identical format and one clear scope gap: Desert Peak includes synthetic underlayment; Sunstate does not. $2,200 total price variance.",
+    "difficulty": "easy",
+    "input_data": {
+      "project_type": "roof replacement",
+      "location": "Phoenix, AZ 85028",
+      "quotes": [
+        {
+          "contractor_name": "Desert Peak Roofing",
+          "total_price": 16400,
+          "line_items": [
+            { "description": "Remove existing shingles (2 layers)", "price": 1200 },
+            { "description": "Install synthetic underlayment", "price": 800 },
+            { "description": "Install 30-year architectural shingles (GAF Timberline HDZ)", "price": 11200 },
+            { "description": "Replace 4 pipe boots and 2 ridge vents", "price": 600 },
+            { "description": "Haul away and cleanup", "price": 400 },
+            { "description": "Permit (pulled by contractor)", "price": 2200 }
+          ],
+          "warranty": "5-year workmanship warranty",
+          "notes": "GAF certified installer. Permit pulled by contractor."
+        },
+        {
+          "contractor_name": "Sunstate Contractors",
+          "total_price": 14200,
+          "line_items": [
+            { "description": "Tear off existing roof", "price": 1400 },
+            { "description": "Install 30-year architectural shingles", "price": 11300 },
+            { "description": "Install new ridge vents", "price": 600 },
+            { "description": "Debris removal", "price": 900 }
+          ],
+          "warranty": "2-year workmanship warranty",
+          "notes": "Homeowner responsible for permit. No underlayment specified."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-01",
+    "description": "Two HVAC replacement quotes using different terminology for equivalent line items ('labor' vs. 'installation charge'), with a $1,800 total variance and one quote including a programmable thermostat the other omits.",
+    "difficulty": "realistic",
+    "input_data": {
+      "project_type": "HVAC replacement",
+      "location": "Scottsdale, AZ 85251",
+      "quotes": [
+        {
+          "contractor_name": "AZ Comfort Systems",
+          "total_price": 8400,
+          "line_items": [
+            { "description": "Carrier 3-ton 16 SEER2 split system (unit)", "price": 3800 },
+            { "description": "Labor — removal and installation", "price": 2600 },
+            { "description": "Programmable thermostat (Honeywell T6 Pro)", "price": 180 },
+            { "description": "Permit", "price": 450 },
+            { "description": "Refrigerant (R-410A, 5 lbs)", "price": 370 },
+            { "description": "Ductwork inspection and sealing", "price": 1000 }
+          ],
+          "warranty": "10-year parts, 1-year labor",
+          "notes": "NATE-certified technicians."
+        },
+        {
+          "contractor_name": "Desert Air HVAC",
+          "total_price": 6600,
+          "line_items": [
+            { "description": "3-ton 16 SEER split system", "price": 3600 },
+            { "description": "Installation charge", "price": 2100 },
+            { "description": "Refrigerant", "price": 300 },
+            { "description": "Permit", "price": 600 }
+          ],
+          "warranty": "5-year parts",
+          "notes": "No thermostat included. No ductwork service included."
+        }
+      ]
+    }
+  },
+  {
+    "id": "realistic-02",
+    "description": "Two kitchen remodel quotes where Mesa Remodeling includes permit cost in the total; Copper Basin assigns permit responsibility to homeowner. Both include cabinet replacement and countertops but differ on appliance installation.",
+    "difficulty": "realistic",
+    "input_data": {
+      "project_type": "kitchen remodel",
+      "location": "Mesa, AZ 85201",
+      "quotes": [
+        {
+          "contractor_name": "Mesa Remodeling Co.",
+          "total_price": 34500,
+          "line_items": [
+            { "description": "Cabinet removal and disposal", "price": 800 },
+            { "description": "Semi-custom cabinet installation (42 LF)", "price": 14200 },
+            { "description": "Quartz countertop installation (28 SF)", "price": 6800 },
+            { "description": "Appliance installation (range, dishwasher, microwave)", "price": 1200 },
+            { "description": "Backsplash tile (subway, 24 SF)", "price": 2100 },
+            { "description": "Plumbing (sink relocation, disposal install)", "price": 3800 },
+            { "description": "Electrical (GFCI, under-cabinet lighting)", "price": 2100 },
+            { "description": "Permit (pulled by contractor)", "price": 3500 }
+          ],
+          "warranty": "1-year workmanship",
+          "notes": "Permit pulled by contractor. Appliances not included — installation only."
+        },
+        {
+          "contractor_name": "Copper Basin Renovations",
+          "total_price": 31200,
+          "line_items": [
+            { "description": "Cabinet demolition and haul away", "price": 700 },
+            { "description": "Cabinet installation (semi-custom, 42 LF)", "price": 13800 },
+            { "description": "Quartz countertops (28 SF)", "price": 6600 },
+            { "description": "Backsplash tile installation", "price": 1900 },
+            { "description": "Plumbing rough-in and finish", "price": 3800 },
+            { "description": "Electrical (GFCI outlets, lighting)", "price": 2200 },
+            { "description": "Painting — walls and ceiling", "price": 2200 }
+          ],
+          "warranty": "1-year workmanship",
+          "notes": "Permit responsibility: homeowner. Appliance installation not included. Painting included."
+        }
+      ]
+    }
+  },
+  {
+    "id": "hard-01",
+    "description": "Three bathroom addition quotes with overlapping and conflicting scope descriptions. Pinnacle uses a lump-sum total with partial line items. SunValley and AZ Bath have full itemization but use different terminology for tile and fixture work.",
+    "difficulty": "hard",
+    "input_data": {
+      "project_type": "bathroom addition",
+      "location": "Tempe, AZ 85281",
+      "quotes": [
+        {
+          "contractor_name": "Pinnacle Construction",
+          "total_price": 22000,
+          "line_items": [
+            { "description": "Complete bathroom addition — all labor and materials", "price": 22000 }
+          ],
+          "warranty": "1-year",
+          "notes": "Includes plumbing, tile, fixtures, and electrical. Permit not specified."
+        },
+        {
+          "contractor_name": "SunValley Bath & Tile",
+          "total_price": 26400,
+          "line_items": [
+            { "description": "Framing and drywall (120 SF)", "price": 3200 },
+            { "description": "Plumbing rough-in (toilet, vanity, shower)", "price": 4800 },
+            { "description": "Shower tile installation (60 SF, 4x4 ceramic)", "price": 2800 },
+            { "description": "Floor tile installation (30 SF)", "price": 1400 },
+            { "description": "Vanity and toilet installation (fixtures by owner)", "price": 1600 },
+            { "description": "Electrical — GFCI, exhaust fan, lighting", "price": 2200 },
+            { "description": "Insulation", "price": 800 },
+            { "description": "Paint", "price": 600 },
+            { "description": "Permit", "price": 1800 },
+            { "description": "Cleanup and haul away", "price": 700 },
+            { "description": "Project management fee (10%)", "price": 2500 },
+            { "description": "Materials markup (15%)", "price": 3700 }
+          ],
+          "warranty": "2-year workmanship",
+          "notes": "Fixtures (vanity, toilet, shower fixtures) are owner-supplied. Project mgmt fee applies."
+        },
+        {
+          "contractor_name": "AZ Bath Specialists",
+          "total_price": 24800,
+          "line_items": [
+            { "description": "Structural framing and moisture barrier", "price": 3600 },
+            { "description": "Plumbing — supply and drain lines, shower valve", "price": 5200 },
+            { "description": "Shower surround tile (porcelain, 60 SF)", "price": 3100 },
+            { "description": "Floor tile (30 SF)", "price": 1600 },
+            { "description": "Vanity, toilet, and shower fixture installation (included)", "price": 2400 },
+            { "description": "Electrical — GFCIs, exhaust, recessed lighting", "price": 2500 },
+            { "description": "Insulation and drywall", "price": 2200 },
+            { "description": "Permit", "price": 1800 },
+            { "description": "Painting", "price": 700 },
+            { "description": "Final cleanup", "price": 700 }
+          ],
+          "warranty": "3-year workmanship on labor",
+          "notes": "Fixtures included in quote price. Tile is porcelain (upgrade from ceramic)."
+        }
+      ]
+    }
+  },
+  {
+    "id": "adversarial-01",
+    "description": "A single lump-sum roofing quote with no line items, no warranty language, no permit mention, and only vague scope description. Tests whether the AI correctly limits output to what is present rather than inventing specifics.",
+    "difficulty": "adversarial",
+    "input_data": {
+      "project_type": "roof replacement",
+      "location": "Phoenix, AZ 85032",
+      "quotes": [
+        {
+          "contractor_name": "Quick Fix Roofing LLC",
+          "total_price": 9800,
+          "line_items": [
+            { "description": "Complete roof replacement, all materials and labor", "price": 9800 }
+          ],
+          "warranty": "",
+          "notes": "Call for questions."
+        }
+      ]
+    }
+  }
+]

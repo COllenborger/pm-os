@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — TaskFlow</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <a href="dashboard.html" class="topbar-logo">Task<span>Flow</span></a>
+    <input class="topbar-search" type="text" placeholder="Search tasks, projects, people…" readonly>
+    <div class="topbar-right">
+      <button class="icon-btn" onclick="demoAlert(event)" title="Notifications">🔔</button>
+      <div class="avatar" title="Rachel Torres">RT</div>
+    </div>
+  </header>
+
+  <div class="app-body">
+    <!-- Sidebar -->
+    <nav class="sidebar" id="sidebar"></nav>
+
+    <!-- Main content -->
+    <main class="main-content">
+
+      <!-- Weekly summary banner -->
+      <a href="summary.html" class="dash-banner">
+        <div class="dash-banner-pulse"></div>
+        <div class="dash-banner-text">
+          <div class="dash-banner-title">Your weekly summary is ready — 8 items need attention</div>
+          <div class="dash-banner-sub">Mon Apr 14 · GreenPath Studios Marketing Ops · Last generated Sun 11:00 PM</div>
+        </div>
+        <span class="dash-banner-cta">View summary →</span>
+      </a>
+
+      <!-- Page header -->
+      <div class="page-header">
+        <div>
+          <h1>All Projects</h1>
+          <div class="page-meta">GreenPath Studios Marketing Ops · 14 active, 1 completed</div>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-ghost" onclick="demoAlert(event)">Filter</button>
+          <button class="btn btn-ghost" onclick="demoAlert(event)">Group by status</button>
+          <button class="btn btn-primary" onclick="demoAlert(event)">+ New project</button>
+        </div>
+      </div>
+
+      <!-- Project grid (rendered by JS) -->
+      <div class="project-grid" id="project-grid"></div>
+
+    </main>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="fixtures.js"></script>
+<script>
+renderSidebar('sidebar', 'Home');
+
+function renderGrid() {
+  const grid = document.getElementById('project-grid');
+  let html = '';
+  PROJECTS.forEach(p => {
+    const opacity = p.status === 'completed' ? 'opacity:0.55;' : '';
+    html += `
+      <div class="project-tile" style="${opacity}" onclick="demoAlert(event)" title="Opens project in full build">
+        <div class="tile-header">
+          <span class="badge ${p.status}">${statusLabel(p.status)}</span>
+          <span class="tile-name">${p.name}</span>
+        </div>
+        <div class="tile-meta">
+          <span class="owner-wrap" style="display:flex;align-items:center;gap:5px;">
+            <span class="mini-avatar">${initials(p.owner)}</span>
+            ${p.owner}
+          </span>
+          <span>${fmtDate(p.target)}</span>
+        </div>
+        <div class="tile-progress">
+          <div class="tile-fill" style="width:${p.pct}%;background:${
+            p.status === 'blocked'  ? 'var(--status-blocked)'  :
+            p.status === 'at_risk'  ? 'var(--status-at-risk)'  :
+            p.status === 'overdue'  ? 'var(--status-overdue)'  :
+            p.status === 'completed'? 'var(--status-completed)':
+            'var(--status-on-track)'
+          }"></div>
+        </div>
+      </div>`;
+  });
+  grid.innerHTML = html;
+}
+
+renderGrid();
+</script>
+</body>
+</html>

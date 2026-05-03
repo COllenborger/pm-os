@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comparezy Eval Dashboard</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0b0c14;
+      color: #c9d1d9;
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      font-size: 13px;
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #12131f;
+      border-bottom: 1px solid #2a2d45;
+      padding: 0 24px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; }
+    .logo-icon {
+      width: 28px; height: 28px; background: #4a90d9;
+      border-radius: 5px; display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; color: #fff;
+    }
+    .logo-text { font-size: 16px; font-weight: 600; color: #e6edf3; letter-spacing: 0.3px; }
+    .logo-sub { font-size: 11px; color: #6e7891; margin-top: 1px; }
+    .header-right { display: flex; align-items: center; gap: 16px; }
+    #last-run { font-size: 11px; color: #6e7891; }
+    #refresh-btn {
+      background: #1e3a5f; color: #4a90d9; border: 1px solid #2a5280;
+      padding: 6px 14px; border-radius: 4px; cursor: pointer; font-size: 12px;
+      transition: background 0.15s;
+    }
+    #refresh-btn:hover { background: #2a5280; }
+
+    /* ── Layout ── */
+    main { padding: 20px 24px; max-width: 1400px; margin: 0 auto; }
+
+    /* ── Top KPI row ── */
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+    .kpi-card {
+      background: #12131f;
+      border: 1px solid #2a2d45;
+      border-radius: 6px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .kpi-card.blue::before  { background: #4a90d9; }
+    .kpi-card.green::before { background: #2ecc71; }
+    .kpi-card.yellow::before{ background: #f1c40f; }
+    .kpi-card.red::before   { background: #e74c3c; }
+    .kpi-card.purple::before{ background: #9b59b6; }
+    .kpi-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px; color: #6e7891; margin-bottom: 10px; }
+    .kpi-value { font-size: 36px; font-weight: 700; color: #e6edf3; line-height: 1; }
+    .kpi-value.score-green  { color: #2ecc71; }
+    .kpi-value.score-yellow { color: #f1c40f; }
+    .kpi-value.score-red    { color: #e74c3c; }
+    .kpi-sub { font-size: 11px; color: #6e7891; margin-top: 6px; }
+
+    /* Verdict badge */
+    .verdict-badge {
+      display: inline-block; padding: 4px 12px; border-radius: 20px;
+      font-size: 13px; font-weight: 700; letter-spacing: 1px; margin-top: 6px;
+    }
+    .verdict-SHIP   { background: #0d3320; color: #2ecc71; border: 1px solid #2ecc71; }
+    .verdict-ITERATE{ background: #332b00; color: #f1c40f; border: 1px solid #f1c40f; }
+    .verdict-PIVOT  { background: #2d0d0d; color: #e74c3c; border: 1px solid #e74c3c; }
+
+    /* ── Criterion panels ── */
+    .section-title {
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.8px;
+      color: #6e7891; margin-bottom: 12px; padding-bottom: 8px;
+      border-bottom: 1px solid #2a2d45;
+    }
+    .criteria-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 20px; }
+    .crit-card {
+      background: #12131f; border: 1px solid #2a2d45;
+      border-radius: 6px; padding: 16px;
+    }
+    .crit-name { font-size: 11px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .crit-score { font-size: 28px; font-weight: 700; color: #e6edf3; }
+    .crit-score span { font-size: 14px; color: #6e7891; font-weight: 400; }
+    .crit-weight { font-size: 10px; margin: 6px 0; }
+    .weight-Critical { color: #e74c3c; }
+    .weight-High     { color: #f39c12; }
+    .weight-Medium   { color: #3498db; }
+    .weight-Low      { color: #95a5a6; }
+    .score-bar-bg {
+      background: #1e2030; border-radius: 3px; height: 6px; margin-top: 10px; overflow: hidden;
+    }
+    .score-bar-fill {
+      height: 100%; border-radius: 3px; transition: width 0.6s ease;
+    }
+    .crit-n { font-size: 10px; color: #6e7891; margin-top: 6px; }
+
+    /* ── Results table ── */
+    .table-section { background: #12131f; border: 1px solid #2a2d45; border-radius: 6px; overflow: hidden; margin-bottom: 20px; }
+    .table-header { padding: 14px 20px; border-bottom: 1px solid #2a2d45; }
+    table { width: 100%; border-collapse: collapse; }
+    thead tr { background: #0e0f1a; }
+    th {
+      padding: 10px 14px; text-align: left;
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px;
+      color: #6e7891; border-bottom: 1px solid #2a2d45; font-weight: 600;
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid #1e2030; color: #c9d1d9; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #161824; }
+
+    .status-ok    { color: #2ecc71; font-weight: 600; }
+    .status-error { color: #e74c3c; font-weight: 600; }
+    .diff-easy       { color: #2ecc71; }
+    .diff-realistic  { color: #f39c12; }
+    .diff-hard       { color: #e67e22; }
+    .diff-adversarial{ color: #e74c3c; }
+
+    .score-cell { text-align: center; font-weight: 600; border-radius: 4px; padding: 3px 8px; display: inline-block; min-width: 26px; }
+    .s5 { background: #0d3320; color: #2ecc71; }
+    .s4 { background: #1a3300; color: #7dde8c; }
+    .s3 { background: #332b00; color: #f1c40f; }
+    .s2 { background: #2d1a00; color: #e67e22; }
+    .s1 { background: #2d0d0d; color: #e74c3c; }
+    .s-na { color: #6e7891; }
+
+    /* ── Reasoning section ── */
+    .reasoning-section {
+      background: #12131f; border: 1px solid #2a2d45; border-radius: 6px;
+      margin-bottom: 20px; overflow: hidden;
+    }
+    .reasoning-header {
+      padding: 14px 20px; border-bottom: 1px solid #2a2d45;
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    }
+    .reasoning-body { padding: 0 20px 16px; display: none; }
+    .reasoning-body.open { display: block; }
+    .case-block { margin-top: 16px; }
+    .case-title { font-size: 12px; font-weight: 600; color: #4a90d9; margin-bottom: 8px; }
+    .crit-reason { margin-bottom: 6px; font-size: 12px; color: #8b949e; }
+    .crit-reason strong { color: #c9d1d9; }
+
+    /* ── Thresholds ── */
+    .thresh-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+    .thresh-card { background: #12131f; border: 1px solid #2a2d45; border-radius: 6px; padding: 14px 16px; }
+    .thresh-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+    .thresh-ship    .thresh-label { color: #2ecc71; }
+    .thresh-iterate .thresh-label { color: #f1c40f; }
+    .thresh-pivot   .thresh-label { color: #e74c3c; }
+    .thresh-text { font-size: 11px; color: #8b949e; line-height: 1.5; }
+
+    /* ── Empty state ── */
+    #empty-state {
+      text-align: center; padding: 80px 20px; color: #6e7891;
+    }
+    #empty-state .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    #empty-state p { font-size: 14px; margin-bottom: 8px; }
+    #empty-state code { background: #1e2030; padding: 4px 8px; border-radius: 4px; font-size: 12px; color: #c9d1d9; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-icon">C</div>
+    <div>
+      <div class="logo-text">Comparezy Eval Dashboard</div>
+      <div class="logo-sub">LLM-as-Judge · Quote Intelligence Feature</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <span id="last-run">No results loaded</span>
+    <button id="refresh-btn" onclick="loadResults()">↻ Refresh</button>
+  </div>
+</header>
+
+<main>
+  <div id="empty-state">
+    <div class="empty-icon">📊</div>
+    <p>No eval results found.</p>
+    <p>Run the eval skill first: <code>run the Comparezy evals</code></p>
+    <p style="margin-top:8px; font-size:12px;">Then click ↻ Refresh above.</p>
+  </div>
+  <div id="dashboard" style="display:none">
+    <!-- KPI Row -->
+    <div class="kpi-row">
+      <div class="kpi-card blue">
+        <div class="kpi-label">Overall Weighted Score</div>
+        <div class="kpi-value" id="kpi-overall">—</div>
+        <div class="kpi-sub">out of 5.0</div>
+      </div>
+      <div class="kpi-card" id="kpi-verdict-card">
+        <div class="kpi-label">Verdict</div>
+        <div id="kpi-verdict">—</div>
+        <div class="kpi-sub" id="kpi-verdict-sub"></div>
+      </div>
+      <div class="kpi-card purple">
+        <div class="kpi-label">Cases Run</div>
+        <div class="kpi-value" id="kpi-cases">—</div>
+        <div class="kpi-sub" id="kpi-errors"></div>
+      </div>
+      <div class="kpi-card" id="kpi-halluc-card">
+        <div class="kpi-label">Hallucination Rate</div>
+        <div class="kpi-value" id="kpi-halluc">—</div>
+        <div class="kpi-sub">5/5 (zero tolerance)</div>
+      </div>
+    </div>
+
+    <!-- Criteria -->
+    <div class="section-title">Rubric Criteria</div>
+    <div class="criteria-grid" id="criteria-grid"></div>
+
+    <!-- Results Table -->
+    <div class="table-section">
+      <div class="table-header section-title" style="margin:0">Per-Case Results</div>
+      <table>
+        <thead id="results-thead"></thead>
+        <tbody id="results-tbody"></tbody>
+      </table>
+    </div>
+
+    <!-- Reasoning (collapsible) -->
+    <div class="reasoning-section">
+      <div class="reasoning-header" onclick="toggleReasoning()">
+        <span class="section-title" style="margin:0">Judge Reasoning</span>
+        <span id="reasoning-toggle" style="font-size:11px; color:#6e7891">▼ expand</span>
+      </div>
+      <div class="reasoning-body" id="reasoning-body"></div>
+    </div>
+
+    <!-- Thresholds -->
+    <div class="section-title">Decision Thresholds</div>
+    <div class="thresh-grid" id="thresh-grid"></div>
+  </div>
+</main>
+
+<script>
+  const RESULTS_PATH = 'Comparezy-test/results.json';
+
+  function scoreClass(s) {
+    if (s === null || s === undefined) return 's-na';
+    if (s >= 5) return 's5';
+    if (s >= 4) return 's4';
+    if (s >= 3) return 's3';
+    if (s >= 2) return 's2';
+    return 's1';
+  }
+
+  function scoreColor(avg) {
+    if (avg === null) return '#6e7891';
+    if (avg >= 4.0) return '#2ecc71';
+    if (avg >= 3.5) return '#f1c40f';
+    return '#e74c3c';
+  }
+
+  function colorClass(avg) {
+    if (avg >= 4.0) return 'score-green';
+    if (avg >= 3.5) return 'score-yellow';
+    return 'score-red';
+  }
+
+  function determineVerdict(summary) {
+    const pc = summary.per_criterion;
+    const thresh = summary.thresholds;
+
+    const hallucAvg = pc['hallucination_rate']?.avg ?? 0;
+    const scopeAvg  = pc['scope_accuracy']?.avg ?? 0;
+    const clarityAvg = pc['comparison_clarity']?.avg ?? 0;
+    const negAvg = pc['negotiation_quality']?.avg ?? 0;
+    const benchAvg = pc['benchmark_relevance']?.avg ?? 0;
+
+    // Count how many hallucination scores were < 5
+    // We can't compute this without raw results, so approximate from avg
+    // If avg < 4.75 → likely >5% cases failed hallucination
+    if (hallucAvg < 4.0) return 'PIVOT';
+    if (scopeAvg >= 4.0 && hallucAvg >= 4.75 && clarityAvg >= 4.0) return 'SHIP';
+    if (scopeAvg < 3.5 || hallucAvg < 4.5 || clarityAvg < 3.5 || negAvg < 3.0) return 'ITERATE';
+    return 'ITERATE';
+  }
+
+  function toggleReasoning() {
+    const body = document.getElementById('reasoning-body');
+    const toggle = document.getElementById('reasoning-toggle');
+    body.classList.toggle('open');
+    toggle.textContent = body.classList.contains('open') ? '▲ collapse' : '▼ expand';
+  }
+
+  async function loadResults() {
+    document.getElementById('last-run').textContent = 'Loading…';
+    try {
+      const res = await fetch(RESULTS_PATH + '?t=' + Date.now());
+      if (!res.ok) throw new Error('File not found');
+      const data = await res.json();
+      render(data);
+      document.getElementById('empty-state').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+    } catch (e) {
+      document.getElementById('last-run').textContent = 'No results found — run evals first';
+      document.getElementById('empty-state').style.display = 'block';
+      document.getElementById('dashboard').style.display = 'none';
+    }
+  }
+
+  function render(data) {
+    const { summary, results } = data;
+    const pc = summary.per_criterion;
+    const rubric = Object.keys(pc);
+
+    // Timestamp
+    const runTime = results.reduce((latest, r) => r.elapsed_s ? latest : latest, null);
+    document.getElementById('last-run').textContent =
+      'Last run: ' + new Date().toLocaleString();
+
+    // ── Overall score ──
+    const overall = summary.overall_weighted;
+    const overallEl = document.getElementById('kpi-overall');
+    overallEl.textContent = overall !== null ? overall.toFixed(2) : '—';
+    if (overall !== null) overallEl.className = 'kpi-value ' + colorClass(overall);
+
+    // ── Verdict ──
+    const verdict = determineVerdict(summary);
+    const verdictEl = document.getElementById('kpi-verdict');
+    verdictEl.innerHTML = `<span class="verdict-badge verdict-${verdict}">${verdict}</span>`;
+    const verdictCard = document.getElementById('kpi-verdict-card');
+    verdictCard.className = 'kpi-card ' + (verdict === 'SHIP' ? 'green' : verdict === 'PIVOT' ? 'red' : 'yellow');
+    document.getElementById('kpi-verdict-sub').textContent =
+      verdict === 'SHIP' ? 'All thresholds met' :
+      verdict === 'PIVOT' ? 'Hallucination threshold breached' :
+      'One or more criteria below threshold';
+
+    // ── Cases ──
+    document.getElementById('kpi-cases').textContent = summary.total_cases;
+    const errEl = document.getElementById('kpi-errors');
+    errEl.textContent = summary.error_cases > 0
+      ? `⚠ ${summary.error_cases} error(s)` : '✓ No errors';
+    errEl.style.color = summary.error_cases > 0 ? '#e74c3c' : '#2ecc71';
+
+    // ── Hallucination KPI ──
+    const hallucAvg = pc['hallucination_rate']?.avg;
+    const hallucEl = document.getElementById('kpi-halluc');
+    hallucEl.textContent = hallucAvg !== null && hallucAvg !== undefined ? hallucAvg.toFixed(2) : '—';
+    if (hallucAvg !== undefined && hallucAvg !== null)
+      hallucEl.className = 'kpi-value ' + colorClass(hallucAvg);
+    const hallucCard = document.getElementById('kpi-halluc-card');
+    hallucCard.className = 'kpi-card ' + (hallucAvg >= 4.75 ? 'green' : hallucAvg >= 4.0 ? 'yellow' : 'red');
+
+    // ── Criteria grid ──
+    const weightOrder = { 'Critical': 0, 'High': 1, 'Medium': 2, 'Low': 3 };
+    const rubricSorted = Object.entries(pc).sort((a,b) =>
+      (weightOrder[a[1].weight] ?? 9) - (weightOrder[b[1].weight] ?? 9)
+    );
+    const grid = document.getElementById('criteria-grid');
+    grid.innerHTML = rubricSorted.map(([name, info]) => {
+      const avg = info.avg;
+      const pct = avg !== null ? (avg / 5 * 100).toFixed(0) : 0;
+      const color = scoreColor(avg);
+      return `
+        <div class="crit-card">
+          <div class="crit-name">${name.replace(/_/g,' ')}</div>
+          <div class="crit-score" style="color:${color}">${avg !== null ? avg.toFixed(2) : '—'} <span>/ 5</span></div>
+          <div class="crit-weight weight-${info.weight}">${info.weight}</div>
+          <div class="score-bar-bg">
+            <div class="score-bar-fill" style="width:${pct}%; background:${color}"></div>
+          </div>
+          <div class="crit-n">${info.n} case${info.n !== 1 ? 's' : ''} scored</div>
+        </div>`;
+    }).join('');
+
+    // ── Results table ──
+    const criteriaNames = rubricSorted.map(([n]) => n);
+    const thead = document.getElementById('results-thead');
+    thead.innerHTML = '<tr>' +
+      ['ID', 'Description', 'Difficulty', 'Status', ...criteriaNames.map(n => n.replace(/_/g,'<br>')), 'Time'].map(h =>
+        `<th>${h}</th>`
+      ).join('') + '</tr>';
+
+    const tbody = document.getElementById('results-tbody');
+    tbody.innerHTML = results.map(r => {
+      const scoreCells = criteriaNames.map(name => {
+        if (r.status !== 'ok' || !r.scores) return '<td><span class="score-cell s-na">—</span></td>';
+        const s = r.scores[name]?.score;
+        return `<td style="text-align:center"><span class="score-cell ${scoreClass(s)}">${s ?? '—'}</span></td>`;
+      }).join('');
+      const diffClass = 'diff-' + (r.difficulty || 'easy').replace('-', '');
+      return `<tr>
+        <td><strong>${r.id}</strong></td>
+        <td style="max-width:200px; font-size:11px; color:#8b949e">${r.description}</td>
+        <td class="${diffClass}">${r.difficulty}</td>
+        <td class="status-${r.status}">${r.status === 'ok' ? '✓ ok' : '✗ error'}</td>
+        ${scoreCells}
+        <td style="color:#6e7891">${r.elapsed_s}s</td>
+      </tr>`;
+    }).join('');
+
+    // ── Reasoning ──
+    const reasoningBody = document.getElementById('reasoning-body');
+    reasoningBody.innerHTML = results.filter(r => r.status === 'ok' && r.scores).map(r => {
+      const reasons = criteriaNames.map(name => {
+        const entry = r.scores[name];
+        if (!entry) return '';
+        return `<div class="crit-reason"><strong>${name.replace(/_/g,' ')} (${entry.score}/5):</strong> ${entry.reason}</div>`;
+      }).join('');
+      return `<div class="case-block">
+        <div class="case-title">${r.id} — ${r.description}</div>
+        ${reasons}
+      </div>`;
+    }).join('');
+
+    // ── Thresholds ──
+    const thresh = summary.thresholds;
+    document.getElementById('thresh-grid').innerHTML = `
+      <div class="thresh-card thresh-ship">
+        <div class="thresh-label">✓ Ship If</div>
+        <div class="thresh-text">${thresh.ship_if}</div>
+      </div>
+      <div class="thresh-card thresh-iterate">
+        <div class="thresh-label">⟳ Iterate If</div>
+        <div class="thresh-text">${thresh.iterate_if}</div>
+      </div>
+      <div class="thresh-card thresh-pivot">
+        <div class="thresh-label">✕ Pivot If</div>
+        <div class="thresh-text">${thresh.pivot_if}</div>
+      </div>`;
+  }
+
+  loadResults();
+</script>
+</body>
+</html>
